@@ -3,7 +3,6 @@
     "Booster Seat (1).png": "red",
     "0_Row 395 Emoji Sticker_Front_Option.png": "green",
     "0_Row 395 Emoji_Sticker.png": "red",
-    "0_Row 395 Emoji&Discount.png": "yellow",
     "0_Row 395 Hero Emoji_Confetti.png": "red",
     "0_Row 395 Hero Emoji.png": "red",
     "0_Row 395 Loyalty Campaign_Front.png": "red",
@@ -737,7 +736,8 @@
     "Thailand (Female Driver).png": "red",
     "Thailand (Male Driver).png": "red",
     "Thailand_Southeast asian_Business.png": "green",
-    "Women for Women (Saudi Arabia).png": "red"
+    "Women for Women (Saudi Arabia).png": "red",
+    "0_Row 395 Emoji&Discount.png": "green"
   },
   "tags": {}
 }
