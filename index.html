@@ -244,7 +244,7 @@
   <div class="divider"></div>
   <div id="status-bar"><div class="dot"></div><span id="status-text">Loading…</span></div>
   <div class="spacer"></div>
-  <button class="tb-btn" id="btn-scan" disabled onclick="autoScanWorkFiles()">🤖 Auto-Scan</button>
+  <button class="tb-btn" id="btn-scan" onclick="autoScanWorkFiles()">🤖 Auto-Scan</button>
   <button class="tb-btn" id="btn-images" onclick="linkImgFolder()">🖼 Link Images</button>
   <button class="tb-btn" onclick="exportData()">📥 Export</button>
   <button class="tb-btn danger" onclick="clearAll()">↺ Reset</button>
@@ -440,7 +440,6 @@
           activeImgHandle = imgH;
           activeWorkHandle = workH || null;
           await loadImages();
-          document.getElementById('btn-scan').disabled = !workH;
           return;
         }
         // Permission needs re-granting — show a prompt
@@ -562,7 +561,6 @@
     activeWorkHandle = workH || null;
     document.getElementById('setup-screen').innerHTML='';
     document.getElementById('setup-screen').style.display='none';
-    document.getElementById('btn-scan').disabled = !workH;
     await loadImages();
   }
 
@@ -586,7 +584,6 @@
       const h = await showDirectoryPicker({mode:'read'});
       await saveH('work', h);
       activeWorkHandle = h;
-      document.getElementById('btn-scan').disabled = false;
       toast('✓ Work folder linked');
     } catch(e){}
   }
@@ -914,7 +911,6 @@
     activeImgHandle=activeWorkHandle=null;
     document.getElementById('app').innerHTML='';
     searchInput.value=''; searchInput.classList.remove('has-value');
-    document.getElementById('btn-scan').disabled=true;
     document.getElementById('summary-bar').classList.remove('visible');
     setStatus('','—');
     init();
