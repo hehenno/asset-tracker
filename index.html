@@ -14,7 +14,7 @@
       --green: #4ade80; --green-dim: rgba(74,222,128,0.15);
       --red: #f87171;   --red-dim: rgba(248,113,113,0.15);
       --yellow: #fbbf24;--yellow-dim: rgba(251,191,36,0.15);
-      --blue: #60a5fa;  --blue-dim: rgba(96,165,250,0.15);
+      --blue: #a78bfa;  --blue-dim: rgba(167,139,250,0.15);
       --cell: 130px; --radius: 6px;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -338,8 +338,18 @@
   const zoomEl = document.getElementById('zoom');
   const savedZoom = localStorage.getItem('atZoom')||'130';
   zoomEl.value=savedZoom; applyZoom(savedZoom);
-  zoomEl.addEventListener('input',e=>{applyZoom(e.target.value);localStorage.setItem('atZoom',e.target.value);});
-  function applyZoom(v){document.documentElement.style.setProperty('--cell',v+'px');document.body.classList.toggle('hide-names',parseInt(v)<90);}
+  let zoomRaf;
+  zoomEl.addEventListener('input',e=>{
+    const v=e.target.value;
+    if(zoomRaf) cancelAnimationFrame(zoomRaf);
+    zoomRaf=requestAnimationFrame(()=>{ applyZoom(v); localStorage.setItem('atZoom',v); });
+  });
+  let _lastHideNames = null;
+  function applyZoom(v){
+    document.documentElement.style.setProperty('--cell',v+'px');
+    const hide = parseInt(v)<90;
+    if(hide !== _lastHideNames){ document.body.classList.toggle('hide-names', hide); _lastHideNames=hide; }
+  }
 
   // ── TINT ──
   const tintToggle = document.getElementById('tint-toggle');
@@ -620,7 +630,6 @@
   }
 
   // ── AUTO SCAN ──
-  async function collectDirs(dirH,arr){for await(const [name,h] of dirH.entries()) if(h.kind==='directory'){arr.push(name);await collectDirs(h,arr);}}
   function fuzzyMatch(ib,fn){
     const ci=ib.toLowerCase().replace(/[^a-z0-9]/g,''),cf=fn.toLowerCase().replace(/[^a-z0-9]/g,'');
     if(cf===ci||cf.includes(ci)||ci.includes(cf)) return true;
@@ -631,20 +640,38 @@
     for(let i=1;i<=ci.length;i++) for(let j=1;j<=cf.length;j++) if(ci[i-1]===cf[j-1]){dp[i][j]=dp[i-1][j-1]+1;mx=Math.max(mx,dp[i][j]);}
     return mx>=5&&(mx/ci.length>=0.75||mx/cf.length>=0.75);
   }
+  async function collectWorkNames(dirH, arr, depth){
+    depth = depth||0;
+    for await(const [name,h] of dirH.entries()){
+      if(h.kind==='file'){
+        arr.push(name.replace(/\.[^/.]+$/,'').toLowerCase());
+      } else if(h.kind==='directory'){
+        arr.push(name.toLowerCase());
+        await collectWorkNames(h, arr, depth+1);
+      }
+      // yield to browser every 200 entries so page stays responsive
+      if(arr.length % 200 === 0){
+        setStatus('saving', `Scanning… ${arr.length} found`);
+        await new Promise(r=>setTimeout(r,0));
+      }
+    }
+  }
   async function autoScanWorkFiles(){
     if(!activeWorkHandle){
-      // prompt to link work folder
       await linkWorkFolder();
       if(!activeWorkHandle) return;
     }
     if(!assets.length){ toast('Load images first'); return; }
     setStatus('saving','Scanning…');
-    const dirs=[]; await collectDirs(activeWorkHandle,dirs);
+    const names=[];
+    await collectWorkNames(activeWorkHandle, names);
+    setStatus('saving',`Matching ${names.length} entries…`);
+    await new Promise(r=>setTimeout(r,0));
     let changed=0;
     assets.forEach(cat=>cat.items.forEach(item=>{
       if(item.status==='yellow'||item.status==='blue') return;
-      const base=item.name.replace(/\.[^/.]+$/,'');
-      const found=dirs.some(d=>fuzzyMatch(base,d));
+      const base=item.name.replace(/\.[^/.]+$/,'').toLowerCase();
+      const found=names.some(n=>fuzzyMatch(base,n));
       const next=found?'green':'red';
       if(item.status!==next){item.status=next;statuses[item.name]=next;changed++;}
     }));
