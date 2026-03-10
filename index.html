@@ -228,6 +228,17 @@
     #toast { position: fixed; bottom: 70px; left: 50%; transform: translateX(-50%); background: var(--surface2); border: 1px solid var(--border); border-radius: var(--radius); padding: 8px 16px; font-size: 0.72rem; color: var(--text); opacity: 0; transition: opacity 0.3s; pointer-events: none; white-space: nowrap; z-index: 300; }
     #toast.show { opacity: 1; }
 
+    #img-banner {
+      display: flex; align-items: center; gap: 12px;
+      padding: 12px 18px; margin-bottom: 16px;
+      border-radius: var(--radius); border: 1px solid var(--accent);
+      background: var(--accent-dim); cursor: pointer;
+      font-size: 0.78rem; font-weight: 600; color: var(--accent);
+      transition: background 0.15s;
+    }
+    #img-banner:hover { background: rgba(181,255,90,0.2); }
+    #img-banner .ib-hint { font-size: 0.65rem; color: var(--muted); font-weight: 400; }
+
     mark { background: rgba(181,255,90,0.2); color: var(--accent); border-radius: 2px; padding: 0 1px; }
   </style>
 </head>
@@ -244,6 +255,7 @@
   <div class="divider"></div>
   <div id="status-bar"><div class="dot"></div><span id="status-text">Loading…</span></div>
   <div class="spacer"></div>
+  <button class="tb-btn" id="btn-sync" onclick="syncImages()">🔄 Sync</button>
   <button class="tb-btn" id="btn-scan" onclick="autoScanWorkFiles()">🤖 Auto-Scan</button>
   <button class="tb-btn" id="btn-images" onclick="linkImgFolder()">🖼 Link Images</button>
   <button class="tb-btn" onclick="exportData()">📥 Export</button>
@@ -282,6 +294,10 @@
 
   <div id="main">
     <div id="setup-screen"></div>
+    <div id="img-banner" style="display:none" onclick="syncImages()">
+      <span id="img-banner-text">🖼 Click to load images</span>
+      <span class="ib-hint">browser needs one click per session</span>
+    </div>
     <div id="search-banner"><span id="sb-text"></span><span class="sbc" id="sb-clr">clear</span></div>
     <div id="app"></div>
   </div>
@@ -321,7 +337,9 @@
   let activeFilter = null, activeTagFilter = null, searchQuery = '';
   let activeImgHandle = null, activeWorkHandle = null;
   let tagTarget = null;
-  let ghFileSha = null; // needed for GitHub API updates
+  let ghFileSha = null;
+  let saveTimer, toastT, searchTimer, zoomRaf, _lastHideNames = null;
+  const STATUS_CYCLE = [null,'green','red','yellow','blue'];
 
   // ── LOCALSTORAGE CONFIG ──
   const getCfg = k => localStorage.getItem(CONFIG_KEYS[k]) || '';
@@ -338,13 +356,11 @@
   const zoomEl = document.getElementById('zoom');
   const savedZoom = localStorage.getItem('atZoom')||'130';
   zoomEl.value=savedZoom; applyZoom(savedZoom);
-  let zoomRaf;
   zoomEl.addEventListener('input',e=>{
     const v=e.target.value;
     if(zoomRaf) cancelAnimationFrame(zoomRaf);
     zoomRaf=requestAnimationFrame(()=>{ applyZoom(v); localStorage.setItem('atZoom',v); });
   });
-  let _lastHideNames = null;
   function applyZoom(v){
     document.documentElement.style.setProperty('--cell',v+'px');
     const hide = parseInt(v)<90;
@@ -359,7 +375,6 @@
 
   // ── SEARCH ──
   const searchInput = document.getElementById('search-input');
-  let searchTimer;
   searchInput.addEventListener('input', e=>{
     searchInput.classList.toggle('has-value', !!e.target.value);
     clearTimeout(searchTimer);
@@ -370,7 +385,6 @@
   function clearSearch(){searchInput.value='';searchInput.classList.remove('has-value');searchQuery='';render();}
 
   // ── TOAST & STATUS ──
-  let toastT;
   function toast(m,d=2400){const el=document.getElementById('toast');el.textContent=m;el.classList.add('show');clearTimeout(toastT);toastT=setTimeout(()=>el.classList.remove('show'),d);}
   function setStatus(s,t){document.getElementById('status-bar').className=s;document.getElementById('status-text').textContent=t;}
 
@@ -406,7 +420,6 @@
     }
   }
 
-  let saveTimer;
   function ghSave(){
     clearTimeout(saveTimer);
     saveTimer = setTimeout(async ()=>{
@@ -450,11 +463,12 @@
           activeImgHandle = imgH;
           activeWorkHandle = workH || null;
           await loadImages();
+          document.getElementById('btn-scan').disabled = !workH;
           return;
         }
-        // Permission needs re-granting — show a prompt
-        renderNeedsPermission(imgH);
-      } catch(e){ renderNeedsPermission(imgH); }
+        // Permission needs re-granting — show slim banner, not a full screen
+        showImgBanner(imgH.name);
+      } catch(e){ showImgBanner(imgH ? imgH.name : ''); }
     } else {
       renderNeedsImages();
     }
@@ -551,28 +565,42 @@
   function renderNeedsPermission(imgH){
     document.getElementById('setup-screen').style.display='block';
     document.getElementById('setup-screen').innerHTML=`
-      <div class="setup-title">Allow <span>folder access</span></div>
-      <p class="setup-sub">Browser permissions reset between sessions. Click below to re-allow access to <strong>${esc(imgH.name)}</strong>.</p>
+      <div class="setup-title">Ready to <span>load</span></div>
+      <p class="setup-sub">Click below to load your images from <strong>${esc(imgH.name)}</strong>.</p>
       <div class="setup-card">
-        <button class="setup-btn" onclick="reGrantPermission()">Allow access to folder →</button>
+        <button class="setup-btn" onclick="reGrantPermission()">Load images →</button>
         <br><br>
-        <button class="setup-btn secondary" onclick="linkImgFolder()">Choose a different folder</button>
+        <button class="setup-btn secondary" style="margin-top:10px" onclick="linkImgFolder()">Choose a different folder</button>
       </div>`;
-    setStatus('synced','Waiting for permission');
+    setStatus('synced','Click to load images');
   }
 
-  async function reGrantPermission(){
+  function showImgBanner(folderName){
+    const b = document.getElementById('img-banner');
+    document.getElementById('img-banner-text').textContent = '🖼 Click to load ' + (folderName || 'images');
+    b.style.display = 'flex';
+    setStatus('synced', 'Click banner to load images');
+  }
+
+  async function syncImages(){
     const imgH = await getH('img');
     if(!imgH){ renderNeedsImages(); return; }
-    const perm = await imgH.requestPermission({mode:'read'});
-    if(perm !== 'granted'){ toast('Permission denied'); return; }
-    activeImgHandle = imgH;
-    const workH = await getH('work');
-    activeWorkHandle = workH || null;
-    document.getElementById('setup-screen').innerHTML='';
-    document.getElementById('setup-screen').style.display='none';
-    await loadImages();
+    try {
+      const perm = await imgH.requestPermission({mode:'read'});
+      if(perm !== 'granted'){ toast('Permission denied'); return; }
+      activeImgHandle = imgH;
+      const workH = await getH('work');
+      activeWorkHandle = workH || null;
+      document.getElementById('setup-screen').innerHTML='';
+      document.getElementById('setup-screen').style.display='none';
+      document.getElementById('img-banner').style.display='none';
+      updateImgBtn(imgH);
+      document.getElementById('btn-scan').disabled = !workH;
+      await loadImages();
+    } catch(e){ toast('Could not load images'); }
   }
+
+  async function reGrantPermission(){ await syncImages(); }
 
   // ── LINK IMAGE FOLDER ──
   async function linkImgFolder(){
@@ -630,15 +658,24 @@
   }
 
   // ── AUTO SCAN ──
-  function fuzzyMatch(ib,fn){
-    const ci=ib.toLowerCase().replace(/[^a-z0-9]/g,''),cf=fn.toLowerCase().replace(/[^a-z0-9]/g,'');
-    if(cf===ci||cf.includes(ci)||ci.includes(cf)) return true;
-    const wi=ib.toLowerCase().split(/[^a-z0-9]+/).filter(w=>w.length>0);
-    const wf=fn.toLowerCase().split(/[^a-z0-9]+/).filter(w=>w.length>0);
-    if(wi.length&&wi.filter(w=>wf.includes(w)).length/wi.length>=0.75) return true;
-    const dp=Array(ci.length+1).fill(0).map(()=>Array(cf.length+1).fill(0));let mx=0;
+  function fuzzyMatch(ib, fn){
+    const ci = ib.toLowerCase().replace(/[^a-z0-9]/g,'');
+    const cf = fn.toLowerCase().replace(/[^a-z0-9]/g,'');
+    if(!ci || !cf) return false;
+    // exact match
+    if(ci === cf) return true;
+    // only allow substring match if the base name is at least 5 chars long
+    if(ci.length >= 5 && cf.includes(ci)) return true;
+    if(cf.length >= 5 && ci.includes(cf)) return true;
+    // word overlap — at least 75% of words in image name found in folder/file name
+    const wi = ib.toLowerCase().split(/[^a-z0-9]+/).filter(w=>w.length>2);
+    const wf = fn.toLowerCase().split(/[^a-z0-9]+/).filter(w=>w.length>2);
+    if(wi.length >= 2 && wi.filter(w=>wf.includes(w)).length / wi.length >= 0.75) return true;
+    // longest common substring — only if both names are long enough
+    if(ci.length < 6 || cf.length < 6) return false;
+    const dp=Array(ci.length+1).fill(0).map(()=>Array(cf.length+1).fill(0)); let mx=0;
     for(let i=1;i<=ci.length;i++) for(let j=1;j<=cf.length;j++) if(ci[i-1]===cf[j-1]){dp[i][j]=dp[i-1][j-1]+1;mx=Math.max(mx,dp[i][j]);}
-    return mx>=5&&(mx/ci.length>=0.75||mx/cf.length>=0.75);
+    return mx>=6 && mx/ci.length>=0.75 && mx/cf.length>=0.75;
   }
   async function collectWorkNames(dirH, arr, depth){
     depth = depth||0;
@@ -669,13 +706,13 @@
     await new Promise(r=>setTimeout(r,0));
     let changed=0;
     assets.forEach(cat=>cat.items.forEach(item=>{
-      if(item.status==='yellow'||item.status==='blue') return;
+      if(item.status==='yellow'||item.status==='blue'||item.status==='green') return;
       const base=item.name.replace(/\.[^/.]+$/,'').toLowerCase();
       const found=names.some(n=>fuzzyMatch(base,n));
       const next=found?'green':'red';
       if(item.status!==next){item.status=next;statuses[item.name]=next;changed++;}
     }));
-    if(changed){render();ghSave();toast(`✓ Scan done — ${changed} updated`);}
+    if(changed){render();ghSave();setStatus('synced','Ready');toast(`✓ Scan done — ${changed} updated`);}
     else{toast('✓ Scan done — nothing changed');setStatus('synced','Ready');}
   }
 
@@ -688,7 +725,6 @@
   }
 
   // ── FILTER ──
-  const STATUS_CYCLE=[null,'green','red','yellow','blue'];
   function setFilter(f){
     activeFilter=f;
     ['all','green','red','yellow','blue'].forEach(k=>document.getElementById('f-'+k).classList.toggle('active',(f===null&&k==='all')||(f===k)));
@@ -828,6 +864,7 @@
 
   // ── TOGGLE STATUS — pure in-place DOM patch, no render() ──
   function toggleStatus(ci,ii){
+    if(!assets[ci]||!assets[ci].items[ii]){ console.error('[toggle] bad index',ci,ii,assets.length); return; }
     const item=assets[ci].items[ii];
     const prev=item.status;
     const next=STATUS_CYCLE[(STATUS_CYCLE.indexOf(prev)+1)%STATUS_CYCLE.length];
