@@ -239,6 +239,50 @@
     #img-banner:hover { background: rgba(181,255,90,0.2); }
     #img-banner .ib-hint { font-size: 0.65rem; color: var(--muted); font-weight: 400; }
 
+    /* EDIT MODE */
+    #btn-edit { border-color: var(--yellow-dim); color: var(--muted); }
+    #btn-edit:hover { border-color: var(--yellow); background: var(--yellow-dim); color: var(--yellow); }
+    #btn-edit.active { background: var(--yellow-dim); border-color: var(--yellow); color: var(--yellow); font-weight: 600; }
+    body.edit-mode #btn-edit { background: var(--yellow-dim); border-color: var(--yellow); color: var(--yellow); font-weight: 600; }
+    body.edit-mode .asset-item { cursor: pointer; }
+    body:not(.edit-mode) .asset-item { cursor: zoom-in; }
+    body:not(.edit-mode) .tag-btn { display: none !important; }
+    body:not(.edit-mode) .remove-btn { display: none !important; }
+
+    /* PASSWORD MODAL */
+    #pw-backdrop { display: none; position: fixed; inset: 0; z-index: 300; background: rgba(0,0,0,0.8); backdrop-filter: blur(6px); align-items: center; justify-content: center; }
+    #pw-backdrop.open { display: flex; }
+    #pw-box { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 32px 28px; width: 340px; max-width: 90vw; position: relative; text-align: center; }
+    #pw-icon { font-size: 2.5rem; margin-bottom: 12px; }
+    #pw-box h3 { font-family: 'Syne', sans-serif; font-size: 1.1rem; margin-bottom: 6px; }
+    #pw-hint { font-size: 0.72rem; color: var(--muted); margin-bottom: 20px; font-style: italic; }
+    #pw-close { position: absolute; top: 14px; right: 14px; background: none; border: none; color: var(--muted); font-size: 1.2rem; cursor: pointer; }
+    #pw-close:hover { color: var(--text); }
+    .pw-input-row { display: flex; gap: 8px; }
+    #pw-input { flex: 1; padding: 8px 12px; background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius); color: var(--text); font-family: 'DM Mono', monospace; font-size: 0.78rem; outline: none; transition: border-color 0.15s; text-align: center; letter-spacing: 0.1em; }
+    #pw-input:focus { border-color: var(--accent); }
+    #pw-submit { padding: 8px 16px; border-radius: var(--radius); background: var(--accent); color: #000; border: none; font-family: 'DM Mono', monospace; font-size: 0.72rem; font-weight: 600; cursor: pointer; }
+    #pw-submit:hover { background: #c8ff70; }
+    #pw-error { font-size: 0.7rem; color: var(--red); margin-top: 10px; min-height: 18px; }
+
+    /* QUICK-LOOK MODAL */
+    #ql-backdrop { display: none; position: fixed; inset: 0; z-index: 250; background: rgba(0,0,0,0.85); backdrop-filter: blur(8px); align-items: center; justify-content: center; }
+    #ql-backdrop.open { display: flex; }
+    #ql-box { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 20px; max-width: min(600px, 90vw); width: 100%; position: relative; display: flex; flex-direction: column; align-items: center; gap: 14px; }
+    #ql-close { position: absolute; top: 12px; right: 12px; background: var(--surface2); border: 1px solid var(--border); color: var(--muted); font-size: 1.1rem; cursor: pointer; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+    #ql-close:hover { color: var(--text); border-color: var(--accent); }
+    #ql-img-wrap { width: 100%; display: flex; align-items: center; justify-content: center; }
+    #ql-img { max-width: 100%; max-height: 60vh; object-fit: contain; border-radius: 6px; }
+    #ql-name { font-size: 0.75rem; color: var(--muted); text-align: center; word-break: break-all; }
+    #ql-status-row { display: flex; align-items: center; gap: 8px; font-size: 0.72rem; }
+    .ql-status-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+    #ql-tags { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; }
+    .ql-tag { padding: 3px 10px; border-radius: 20px; background: var(--accent-dim); border: 1px solid var(--accent); color: var(--accent); font-size: 0.68rem; }
+    #ql-nav { display: flex; align-items: center; gap: 16px; margin-top: 4px; }
+    #ql-prev, #ql-next { background: var(--surface2); border: 1px solid var(--border); color: var(--text); font-size: 1rem; width: 34px; height: 34px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: border-color 0.15s, background 0.15s; }
+    #ql-prev:hover, #ql-next:hover { border-color: var(--accent); background: var(--accent-dim); color: var(--accent); }
+    #ql-counter { font-size: 0.68rem; color: var(--muted); min-width: 50px; text-align: center; }
+
     mark { background: rgba(181,255,90,0.2); color: var(--accent); border-radius: 2px; padding: 0 1px; }
   </style>
 </head>
@@ -259,6 +303,7 @@
   <button class="tb-btn" id="btn-scan" onclick="autoScanWorkFiles()">🤖 Auto-Scan</button>
   <button class="tb-btn" id="btn-images" onclick="linkImgFolder()">🖼 Link Images</button>
   <button class="tb-btn" onclick="exportData()">📥 Export</button>
+  <button class="tb-btn" id="btn-edit" onclick="toggleEditMode()">🔒 Edit Mode</button>
   <button class="tb-btn danger" onclick="clearAll()">↺ Reset</button>
 </div>
 
@@ -326,6 +371,37 @@
   </div>
 </div>
 
+<!-- Password modal -->
+<div id="pw-backdrop">
+  <div id="pw-box">
+    <button id="pw-close">×</button>
+    <div id="pw-icon">🔒</div>
+    <h3>Enter Edit Mode</h3>
+    <p id="pw-hint">Hint: Fred's favourite country</p>
+    <div class="pw-input-row">
+      <input type="password" id="pw-input" placeholder="Password…" autocomplete="off">
+      <button id="pw-submit" onclick="submitPassword()">Unlock</button>
+    </div>
+    <p id="pw-error"></p>
+  </div>
+</div>
+
+<!-- Quick-look modal -->
+<div id="ql-backdrop">
+  <div id="ql-box">
+    <button id="ql-close">×</button>
+    <div id="ql-img-wrap"><img id="ql-img" src="" alt=""></div>
+    <div id="ql-name"></div>
+    <div id="ql-status-row"></div>
+    <div id="ql-tags"></div>
+    <div id="ql-nav">
+      <button id="ql-prev">←</button>
+      <span id="ql-counter"></span>
+      <button id="ql-next">→</button>
+    </div>
+  </div>
+</div>
+
 <script>
   // ── CONFIG (edit these after deploying) ──────────────────────────────────
   // These are stored in localStorage after first setup, so only needed once.
@@ -338,6 +414,7 @@
   let activeImgHandle = null, activeWorkHandle = null;
   let tagTarget = null;
   let ghFileSha = null;
+  let editMode = false;
   let saveTimer, toastT, searchTimer, zoomRaf, _lastHideNames = null;
   const STATUS_CYCLE = [null,'green','red','yellow','blue'];
 
@@ -628,7 +705,7 @@
 
   function updateImgBtn(h){
     const btn = document.getElementById('btn-images');
-    if(h){ btn.textContent = '🖼 '+h.name; btn.title = 'Click to change folder'; }
+    if(h){ btn.textContent = '🖼 Illustrations linked'; btn.title = h.name; }
     else { btn.textContent = '🖼 Link Images'; }
   }
 
@@ -811,7 +888,7 @@
         const pip=document.createElement('div');
         pip.className='status-pip'+(item.status?' pip-'+item.status:'');
 
-        div.onclick=()=>toggleStatus(ci,idx);
+        div.onclick=()=>{ if(editMode) toggleStatus(ci,idx); else openQuickLook(item); };
         div.appendChild(tb); div.appendChild(rb); div.appendChild(img);
         div.appendChild(nameEl); div.appendChild(tagsEl); div.appendChild(pip);
         gallery.appendChild(div);
@@ -864,6 +941,7 @@
 
   // ── TOGGLE STATUS — pure in-place DOM patch, no render() ──
   function toggleStatus(ci,ii){
+    if(!editMode){ return; } // guard — shouldn't be called in view mode but just in case
     if(!assets[ci]||!assets[ci].items[ii]){ console.error('[toggle] bad index',ci,ii,assets.length); return; }
     const item=assets[ci].items[ii];
     const prev=item.status;
@@ -887,6 +965,7 @@
 
   // ── TAG MODAL ──
   function openTagModal(ci,ii){
+    if(!editMode){ openQuickLook(assets[ci].items[ii]); return; }
     tagTarget={ci,ii};
     const item=assets[ci].items[ii];
     document.getElementById('tm-file').textContent=item.name;
@@ -979,6 +1058,90 @@
     setStatus('','—');
     init();
   }
+
+  // ── EDIT MODE ──
+  function toggleEditMode(){
+    if(editMode){
+      exitEditMode();
+    } else {
+      document.getElementById('pw-input').value='';
+      document.getElementById('pw-error').textContent='';
+      document.getElementById('pw-backdrop').classList.add('open');
+      setTimeout(()=>document.getElementById('pw-input').focus(), 50);
+    }
+  }
+  function exitEditMode(){
+    editMode = false;
+    document.body.classList.remove('edit-mode');
+    document.getElementById('btn-edit').textContent = '🔒 Edit Mode';
+    toast('Edit mode off');
+  }
+  function submitPassword(){
+    const val = document.getElementById('pw-input').value.trim().toLowerCase();
+    if(val === 'neepal'){
+      editMode = true;
+      document.body.classList.add('edit-mode');
+      document.getElementById('btn-edit').textContent = '🔓 Editing';
+      document.getElementById('pw-backdrop').classList.remove('open');
+      toast('✓ Edit mode on — click cards to change status');
+    } else {
+      document.getElementById('pw-error').textContent = 'Wrong password, try again.';
+      document.getElementById('pw-input').value='';
+      document.getElementById('pw-input').focus();
+    }
+  }
+  document.getElementById('pw-close').onclick = () => document.getElementById('pw-backdrop').classList.remove('open');
+  document.getElementById('pw-backdrop').addEventListener('click', e => { if(e.target===document.getElementById('pw-backdrop')) document.getElementById('pw-backdrop').classList.remove('open'); });
+  document.getElementById('pw-input').addEventListener('keydown', e => { if(e.key==='Enter') submitPassword(); });
+
+  // ── QUICK LOOK ──
+  const STATUS_LABELS = { green:'Have files', red:'Missing', yellow:'Need to request', blue:'Animated' };
+  const STATUS_COLORS = { green:'var(--green)', red:'var(--red)', yellow:'var(--yellow)', blue:'var(--blue)' };
+  let qlItems = [], qlIndex = 0;
+
+  function openQuickLook(item){
+    // Build flat list of all currently visible items for arrow navigation
+    qlItems = [];
+    assets.forEach(cat => cat.items.filter(itemVisible).forEach(i => qlItems.push(i)));
+    qlIndex = qlItems.indexOf(item);
+    renderQuickLook(item);
+    document.getElementById('ql-backdrop').classList.add('open');
+  }
+
+  function renderQuickLook(item){
+    document.getElementById('ql-img').src = item.src;
+    document.getElementById('ql-name').textContent = item.name;
+    const sr = document.getElementById('ql-status-row');
+    if(item.status){
+      sr.innerHTML = `<div class="ql-status-dot" style="background:${STATUS_COLORS[item.status]}"></div><span>${STATUS_LABELS[item.status]||item.status}</span>`;
+    } else {
+      sr.innerHTML = '<span style="color:var(--muted)">No status set</span>';
+    }
+    const tl = document.getElementById('ql-tags');
+    tl.innerHTML = '';
+    if(item.tags && item.tags.length){
+      item.tags.forEach(t => { const d=document.createElement('div'); d.className='ql-tag'; d.textContent=t; tl.appendChild(d); });
+    }
+    // Update counter
+    document.getElementById('ql-counter').textContent = qlItems.length > 1 ? `${qlIndex+1} / ${qlItems.length}` : '';
+  }
+
+  function qlNavigate(dir){
+    if(!qlItems.length) return;
+    qlIndex = (qlIndex + dir + qlItems.length) % qlItems.length;
+    renderQuickLook(qlItems[qlIndex]);
+  }
+
+  document.getElementById('ql-close').onclick = () => document.getElementById('ql-backdrop').classList.remove('open');
+  document.getElementById('ql-backdrop').addEventListener('click', e => { if(e.target===document.getElementById('ql-backdrop')) document.getElementById('ql-backdrop').classList.remove('open'); });
+  document.getElementById('ql-prev').onclick = e => { e.stopPropagation(); qlNavigate(-1); };
+  document.getElementById('ql-next').onclick = e => { e.stopPropagation(); qlNavigate(1); };
+  document.addEventListener('keydown', e => {
+    const qlOpen = document.getElementById('ql-backdrop').classList.contains('open');
+    if(qlOpen && e.key==='ArrowLeft'){ qlNavigate(-1); return; }
+    if(qlOpen && e.key==='ArrowRight'){ qlNavigate(1); return; }
+    if(e.key==='Escape'){ closeModal(); document.getElementById('ql-backdrop').classList.remove('open'); document.getElementById('pw-backdrop').classList.remove('open'); }
+  });
 
   init();
 </script>
