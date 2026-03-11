@@ -739,5 +739,9 @@
     "0_Row 395 Hero Emoji.png": "red",
     "Preparation_Night.png": "blue"
   },
-  "tags": {}
+  "tags": {
+    "Row 123 Groceries (basket).png": [
+      "food"
+    ]
+  }
 }
