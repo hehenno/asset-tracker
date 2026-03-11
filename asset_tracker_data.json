@@ -112,7 +112,6 @@
     "Row 120_ Breakfast.png": "green",
     "Row 121 Groceries with bag.png": "red",
     "Row 122 Groceries (without bag, delivery).png": "green",
-    "Row 123 Groceries (basket).png": "red",
     "Row 124_ Alcohol.png": "red",
     "Row 125_ Bakery.png": "green",
     "Row 126_ Books.png": "red",
@@ -737,7 +736,8 @@
     "Bolt Tours (1).png": "yellow",
     "0_Row 395 Hero Emoji_Confetti.png": "red",
     "0_Row 395 Hero Emoji.png": "red",
-    "Preparation_Night.png": "blue"
+    "Preparation_Night.png": "blue",
+    "Row 123 Groceries (basket).png": "green"
   },
   "tags": {
     "Row 123 Groceries (basket).png": [
