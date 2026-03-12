@@ -11,7 +11,6 @@
     "Asian.png": "green",
     "Breakfast (option).png": "green",
     "Breakfast.png": "green",
-    "Burger.png": "blue",
     "Chinese Flag (option).png": "red",
     "Confirmation Mobile Payments  (Version 2).png": "red",
     "Confirmation Mobile Payments (Version 1).png": "red",
@@ -737,7 +736,8 @@
     "0_Row 395 Hero Emoji.png": "red",
     "Preparation_Night.png": "blue",
     "Row 123 Groceries (basket).png": "green",
-    "Sushi 2.png": "green"
+    "Sushi 2.png": "green",
+    "Burger.png": "green"
   },
   "tags": {
     "Row 123 Groceries (basket).png": [
