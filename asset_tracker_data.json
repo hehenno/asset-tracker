@@ -938,7 +938,8 @@
       "money",
       "payment",
       "coins",
-      "phone"
+      "phone",
+      "success"
     ],
     "Delivery in progress_1.png": [
       "courier",
