@@ -973,7 +973,8 @@
       "delivery"
     ],
     "Pharmacy.png": [
-      "drugs"
+      "drugs",
+      "delivery"
     ]
   },
   "videoLinks": {}
