@@ -947,7 +947,9 @@
     ],
     "Delivery in progress_2.png": [
       "courier",
-      "man"
+      "man",
+      "male",
+      "moped"
     ]
   },
   "videoLinks": {}
