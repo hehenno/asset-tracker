@@ -990,7 +990,9 @@
       "baggage"
     ],
     "Row 57 Set Location denied_1.png": [
-      "location"
+      "location",
+      "map",
+      "pin"
     ]
   },
   "videoLinks": {}
