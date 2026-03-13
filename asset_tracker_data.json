@@ -996,7 +996,9 @@
       "hand"
     ],
     "Row 57 Set Location denied_2.png": [
-      "location"
+      "location",
+      "map",
+      "pin"
     ]
   },
   "videoLinks": {}
