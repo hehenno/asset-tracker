@@ -938,6 +938,9 @@
       "payment",
       "coins",
       "phone"
+    ],
+    "Delivery in progress_1.png": [
+      "courier"
     ]
   },
   "videoLinks": {}
