@@ -813,7 +813,8 @@
       "emoji"
     ],
     "0_Row 395 Emoji_Sticker.png": [
-      "emoji"
+      "emoji",
+      "sticker"
     ],
     "0_Row 395 Emoji&Discount.png": [
       "discount",
@@ -824,7 +825,8 @@
       "emoji"
     ],
     "0_Row 395 Hero Emoji.png": [
-      "discount"
+      "discount",
+      "emoji"
     ]
   },
   "videoLinks": {}
