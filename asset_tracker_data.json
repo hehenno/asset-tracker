@@ -18,7 +18,6 @@
     "Decline Mobile Payments  (Version 1).png": "red",
     "Decline Mobile Payments (Version 2).png": "red",
     "Decline Mobile Payments 2.png": "red",
-    "Delivery in progress_1.png": "yellow",
     "Delivery in progress_2.png": "red",
     "Electronics.png": "green",
     "Fast Food.png": "red",
@@ -742,7 +741,8 @@
     "Coin Plus 3.png": "green",
     "Coin Plus 5.png": "green",
     "0_Row 395 Hero Emoji_Confetti.png": "red",
-    "Breakfast (option).png": "green"
+    "Breakfast (option).png": "green",
+    "Delivery in progress_1.png": "red"
   },
   "tags": {
     "Row 123 Groceries (basket).png": [
