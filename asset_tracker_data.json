@@ -741,7 +741,8 @@
     "Coin Plus 4.png": "green",
     "Coin Plus 3.png": "green",
     "Coin Plus 5.png": "green",
-    "0_Row 395 Hero Emoji_Confetti.png": "red"
+    "0_Row 395 Hero Emoji_Confetti.png": "red",
+    "Breakfast (option).png": "green"
   },
   "tags": {
     "Row 123 Groceries (basket).png": [
@@ -803,7 +804,8 @@
       "food",
       "bacon",
       "eggs",
-      "bread"
+      "bread",
+      "tomato"
     ],
     "Breakfast.png": [
       "food"
