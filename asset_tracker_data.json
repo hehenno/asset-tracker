@@ -993,7 +993,8 @@
       "location",
       "map",
       "pin",
-      "hand"
+      "hand",
+      "error"
     ],
     "Row 57 Set Location denied_2.png": [
       "location",
