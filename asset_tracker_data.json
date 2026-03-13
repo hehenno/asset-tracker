@@ -1014,7 +1014,8 @@
     "Row 61 No Internet 2.png": [
       "satellite",
       "internet",
-      "connection"
+      "connection",
+      "disconnected"
     ]
   },
   "videoLinks": {}
