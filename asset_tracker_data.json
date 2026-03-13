@@ -923,7 +923,9 @@
     ],
     "Decline Mobile Payments (Version 2).png": [
       "phone",
-      "money"
+      "money",
+      "coins",
+      "payment"
     ]
   },
   "videoLinks": {}
