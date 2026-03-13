@@ -789,7 +789,8 @@
       "food",
       "drink",
       "alcohol",
-      "bottle"
+      "bottle",
+      "glass"
     ],
     "Wrap.png": [
       "food"
