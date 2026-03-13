@@ -977,7 +977,11 @@
     ],
     "Riding with Pets.png": [
       "animals",
-      "dog"
+      "dog",
+      "cat"
+    ],
+    "Row 14_ Car Rentals v2 (Key).png": [
+      "car"
     ]
   },
   "videoLinks": {}
