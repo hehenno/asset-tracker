@@ -86,8 +86,8 @@
     "Row 92_ Cancel Ride Icon.png": "red",
     "Row 93_ Driver busy Icon.png": "red",
     "Row 94_ Driver accepted change request Icon.png": "red",
-    "Row 96_ Pass.png": "green",
-    "Row 97 Wallet XL.png": "green",
+    "Row 96_ Pass.png": "blue",
+    "Row 97 Wallet XL.png": "blue",
     "Row 99 Payment Failed - Wallet.png": "green",
     "Row 100 Add Money.png": "green",
     "Row 101_ Plane arrived at an airport.png": "blue",
@@ -122,7 +122,7 @@
     "Row 132_ Sweets.png": "green",
     "Row 133_ Toys and Games.png": "red",
     "Row 134_ New merchants.png": "red",
-    "Row 135 Top Rated.png": "green",
+    "Row 135 Top Rated.png": "blue",
     "Row 136_ Delivery Discounts.png": "red",
     "Row 137_ Menu Discounts.png": "green",
     "Row 138 Special offer, gift.png": "red",
@@ -160,7 +160,7 @@
     "Row 322 Personal Data Export flow 5.png": "red",
     "Row 322 Personal Data Export flow 6.png": "red",
     "Row 324 Price bidding flow (Bolt Negotiate).png": "red",
-    "Row 326 AI chatbot agent.png": "green",
+    "Row 326 AI chatbot agent.png": "blue",
     "Row 327 Suitcase Bolt business.png": "green",
     "Row 328 Bolt Business policy.png": "red",
     "Row 329 Bolt Business time.png": "red",
@@ -254,7 +254,7 @@
     "Row 389 Icon 4.png": "red",
     "Row 389 Photo License 1.png": "green",
     "Row 389 Photo License 2.png": "green",
-    "Row 392 Speedometer.png": "green",
+    "Row 392 Speedometer.png": "blue",
     "Row 393 Headlights (1).png": "red",
     "Row 393 Headlights.png": "red",
     "Scooter Charging Dock.png": "red",
@@ -702,7 +702,7 @@
     "Row 170 Businessman with suitcase walking 2.png": "green",
     "Row 323 Family_1.png": "green",
     "Row 323 Family_2.png": "green",
-    "Row 323 Family_3.png": "green",
+    "Row 323 Family_3.png": "blue",
     "Row 323 Family_4.png": "green",
     "Row 325 Customer support agent_1.png": "green",
     "Row 325 Customer support agent_2.png": "green",
@@ -809,5 +809,6 @@
     "Icecream.png": [
       "food"
     ]
-  }
+  },
+  "videoLinks": {}
 }
