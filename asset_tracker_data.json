@@ -919,7 +919,8 @@
       "phone",
       "coins",
       "payment",
-      "money"
+      "money",
+      "warning"
     ],
     "Decline Mobile Payments (Version 2).png": [
       "phone",
