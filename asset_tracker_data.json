@@ -732,7 +732,6 @@
     "Women for Women (Saudi Arabia).png": "red",
     "0_Row 395 Emoji&Discount.png": "red",
     "Bolt Tours (1).png": "yellow",
-    "0_Row 395 Hero Emoji_Confetti.png": "yellow",
     "0_Row 395 Hero Emoji.png": "red",
     "Preparation_Night.png": "blue",
     "Row 123 Groceries (basket).png": "green",
@@ -742,7 +741,8 @@
     "Coin Plus 2.png": "green",
     "Coin Plus 4.png": "green",
     "Coin Plus 3.png": "green",
-    "Coin Plus 5.png": "green"
+    "Coin Plus 5.png": "green",
+    "0_Row 395 Hero Emoji_Confetti.png": "red"
   },
   "tags": {
     "Row 123 Groceries (basket).png": [
@@ -822,7 +822,8 @@
     ],
     "0_Row 395 Hero Emoji_Confetti.png": [
       "discount",
-      "emoji"
+      "emoji",
+      "sticker"
     ],
     "0_Row 395 Hero Emoji.png": [
       "discount",
