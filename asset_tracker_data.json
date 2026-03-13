@@ -999,7 +999,8 @@
       "location",
       "map",
       "pin",
-      "hand"
+      "hand",
+      "error"
     ],
     "Row 58_ App update.png": [
       "balloons",
