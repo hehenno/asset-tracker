@@ -1007,7 +1007,9 @@
       "update"
     ],
     "Row 60_ Wrong Location.png": [
-      "pin"
+      "pin",
+      "map",
+      "location"
     ]
   },
   "videoLinks": {}
