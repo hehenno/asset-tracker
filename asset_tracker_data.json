@@ -1015,7 +1015,8 @@
       "satellite",
       "internet",
       "connection",
-      "disconnected"
+      "disconnected",
+      "error"
     ],
     "Row 62_ General Error.png": [
       "error",
