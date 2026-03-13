@@ -907,7 +907,8 @@
       "phone",
       "coins",
       "money",
-      "payment"
+      "payment",
+      "success"
     ],
     "Credit card.png": [
       "card",
