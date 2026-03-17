@@ -1393,7 +1393,8 @@
     "Row 99 Payment Failed - Wallet.png": [
       "wallet",
       "payment",
-      "money"
+      "money",
+      "warning"
     ]
   },
   "videoLinks": {}
