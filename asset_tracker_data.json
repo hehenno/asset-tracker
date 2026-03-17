@@ -1773,7 +1773,8 @@
       "icon"
     ],
     "Row 360 Parking traffic sign.png": [
-      "parking"
+      "parking",
+      "environment"
     ]
   },
   "videoLinks": {}
