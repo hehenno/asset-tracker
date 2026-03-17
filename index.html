@@ -88,7 +88,10 @@
     .cat-nav-item:hover { color: var(--text); background: var(--surface2); }
     .cat-nav-item .cn-c { margin-left: auto; font-size: 0.6rem; }
 
-    .zoom-row { display: flex; align-items: center; gap: 10px; font-size: 0.7rem; color: var(--muted); }
+    .size-btns { display: flex; gap: 6px; }
+    .size-btn { flex: 1; padding: 5px 0; background: var(--surface2); border: 1px solid var(--border); border-radius: var(--radius); color: var(--muted); font-family: 'DM Mono', monospace; font-size: 0.7rem; cursor: pointer; transition: all 0.15s; }
+    .size-btn:hover { border-color: var(--accent); color: var(--accent); }
+    .size-btn.active { background: var(--accent-dim); border-color: var(--accent); color: var(--accent); font-weight: 600; }
     input[type=range] { flex: 1; accent-color: var(--accent); height: 3px; cursor: pointer; }
 
     .toggle-row { display: flex; align-items: center; justify-content: space-between; font-size: 0.7rem; color: var(--muted); }
@@ -266,13 +269,17 @@
     #ql-backdrop { display: none; position: fixed; inset: 0; z-index: 250; background: rgba(0,0,0,0.85); backdrop-filter: blur(8px); align-items: center; justify-content: center; }
     #ql-backdrop.open { display: flex; }
     #ql-box { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 20px; max-width: min(600px, 90vw); width: 100%; position: relative; display: flex; flex-direction: column; align-items: center; gap: 14px; }
-    #ql-close { position: absolute; top: 12px; right: 12px; background: var(--surface2); border: 1px solid var(--border); color: var(--muted); font-size: 1.1rem; cursor: pointer; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+    #ql-close { position: absolute; top: 12px; right: 12px; background: var(--surface2); border: 1px solid var(--border); color: var(--muted); font-size: 1.1rem; cursor: pointer; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 10; }
     #ql-close:hover { color: var(--text); border-color: var(--accent); }
-    #ql-img-wrap { width: 100%; display: flex; align-items: center; justify-content: center; }
+    #ql-img-wrap { position: relative; width: 100%; display: flex; align-items: center; justify-content: center; }
     #ql-img { max-width: 100%; max-height: 60vh; object-fit: contain; border-radius: 6px; }
     #ql-name { font-size: 0.75rem; color: var(--muted); text-align: center; word-break: break-all; }
     #ql-status-row { display: flex; align-items: center; gap: 8px; font-size: 0.72rem; }
     .ql-status-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+    #ql-toggle-media { display: none; position: absolute; bottom: 14px; left: 50px; background: var(--surface2); border: 1px solid var(--border); color: var(--muted); font-size: 1rem; width: 30px; height: 30px; border-radius: 6px; cursor: pointer; align-items: center; justify-content: center; transition: border-color 0.15s, color 0.15s; }
+    #ql-link-video { display: none; background: none; border: 1px dashed var(--border); color: var(--muted); font-size: 0.68rem; padding: 5px 12px; border-radius: var(--radius); cursor: pointer; transition: border-color 0.15s, color 0.15s; margin-top: 2px; }
+    #ql-link-video:hover { border-color: var(--blue); color: var(--blue); }
+    body.edit-mode #ql-link-video { display: inline-flex; }
     #ql-tags { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; }
     .ql-tag { padding: 3px 10px; border-radius: 20px; background: var(--accent-dim); border: 1px solid var(--accent); color: var(--accent); font-size: 0.68rem; }
     #ql-nav { display: flex; align-items: center; gap: 16px; margin-top: 4px; }
@@ -281,6 +288,12 @@
     #ql-counter { font-size: 0.68rem; color: var(--muted); min-width: 50px; text-align: center; }
     #ql-download { position: absolute; bottom: 14px; left: 14px; background: var(--surface2); border: 1px solid var(--border); color: var(--muted); font-size: 1rem; width: 30px; height: 30px; border-radius: 6px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: border-color 0.15s, color 0.15s; }
     #ql-download:hover { border-color: var(--accent); color: var(--accent); }
+
+    body.images-only .asset-name { display: none !important; }
+    body.images-only .asset-tags { display: none !important; }
+    body.images-only .status-pip { display: none !important; }
+    body.images-only .tag-btn { display: none !important; }
+    body.images-only .asset-item { border-color: transparent !important; background: transparent !important; }
 
     mark { background: rgba(181,255,90,0.2); color: var(--accent); border-radius: 2px; padding: 0 1px; }
   </style>
@@ -302,6 +315,7 @@
   <button class="tb-btn" id="btn-sync" onclick="syncImages()">🔄 Sync</button>
   <button class="tb-btn" id="btn-scan" onclick="autoScanWorkFiles()">🤖 Auto-Scan</button>
   <button class="tb-btn" id="btn-images" onclick="linkImgFolder()">🖼 Link Images</button>
+  <button class="tb-btn" id="btn-videos" onclick="linkVideoFolder()">🎬 Link Videos</button>
   <button class="tb-btn" onclick="exportData()">📥 Export</button>
   <button class="tb-btn" id="btn-edit" onclick="toggleEditMode()">🔒 Edit Mode</button>
   <button class="tb-btn danger" onclick="clearAll()">↺ Reset</button>
@@ -318,17 +332,28 @@
       <button class="filter-btn"        id="f-blue"   onclick="setFilter('blue')"><span class="fb-dot" style="background:var(--blue)"></span>Animated<span class="fb-count" id="fc-blue">0</span></button>
     </div>
     <div class="ss" id="tag-filter-section" style="display:none">
-      <div class="sl">Tags</div>
+      <div class="sl" style="display:flex;align-items:center;justify-content:space-between;">Tags<button id="tag-expand-btn" onclick="toggleTagExpand()" style="background:none;border:none;color:var(--muted);font-size:0.65rem;cursor:pointer;padding:0;font-family:'DM Mono',monospace;"></button></div>
       <div class="tag-pill-list" id="tag-filter-list"></div>
     </div>
     <div class="ss">
       <div class="sl">Cell size</div>
-      <div class="zoom-row"><span>S</span><input type="range" id="zoom" min="60" max="280" value="130"><span>L</span></div>
+      <div class="size-btns">
+        <button class="size-btn" id="sz-xs" onclick="setSize('xs')">XS</button>
+        <button class="size-btn" id="sz-s"  onclick="setSize('s')">S</button>
+        <button class="size-btn active" id="sz-m"  onclick="setSize('m')">M</button>
+        <button class="size-btn" id="sz-l"  onclick="setSize('l')">L</button>
+      </div>
     </div>
     <div class="ss">
       <div class="toggle-row">
         <span>Status tint</span>
         <label class="toggle-switch"><input type="checkbox" id="tint-toggle" checked><span class="toggle-track"></span></label>
+      </div>
+    </div>
+    <div class="ss">
+      <div class="toggle-row">
+        <span>Images only</span>
+        <label class="toggle-switch"><input type="checkbox" id="imgonly-toggle"><span class="toggle-track"></span></label>
       </div>
     </div>
     <div class="ss" style="flex:1;overflow-y:auto;border-bottom:none">
@@ -389,9 +414,13 @@
 <!-- Quick-look modal -->
 <div id="ql-backdrop">
   <div id="ql-box">
-    <button id="ql-close">×</button>
+    <button id="ql-close" aria-label="Close" onclick="document.getElementById('ql-video').pause();document.getElementById('ql-backdrop').classList.remove('open')">×</button>
     <button id="ql-download" title="Download image">💾</button>
-    <div id="ql-img-wrap"><img id="ql-img" src="" alt=""></div>
+    <button id="ql-toggle-media" title="Toggle image/video">▶</button>
+    <div id="ql-img-wrap">
+      <img id="ql-img" src="" alt="">
+      <video id="ql-video" src="" controls style="display:none;max-width:100%;max-height:60vh;border-radius:6px;"></video>
+    </div>
     <div id="ql-name"></div>
     <div id="ql-status-row"></div>
     <div id="ql-tags"></div>
@@ -400,6 +429,7 @@
       <span id="ql-counter"></span>
       <button id="ql-next">→</button>
     </div>
+    <button id="ql-link-video" title="Link a video file to this image">＋ Link video</button>
   </div>
 </div>
 
@@ -410,12 +440,13 @@
   const DEFAULT_FILENAME = 'asset_tracker_data.json';
   // ─────────────────────────────────────────────────────────────────────────
 
-  let statuses = {}, tags = {}, assets = [];
+  let statuses = {}, tags = {}, assets = [], videoLinks = {};
   let activeFilter = new Set(), activeTagFilter = null, searchQuery = '';
-  let activeImgHandle = null, activeWorkHandle = null;
+  let activeImgHandle = null, activeWorkHandle = null, activeVideoHandle = null;
   let tagTarget = null;
   let ghFileSha = null;
   let editMode = false;
+  let videoBlobMap = {}; // filename (no ext) → blob URL, populated at runtime
   let saveTimer, toastT, searchTimer, zoomRaf, _lastHideNames = null;
   const STATUS_CYCLE = [null,'green','red','yellow','blue'];
 
@@ -431,25 +462,30 @@
   async function clearH(){try{const db=await dbP;if(!db)return;db.transaction('h','readwrite').objectStore('h').clear();}catch{}}
 
   // ── ZOOM ──
-  const zoomEl = document.getElementById('zoom');
-  const savedZoom = localStorage.getItem('atZoom')||'130';
-  zoomEl.value=savedZoom; applyZoom(savedZoom);
-  zoomEl.addEventListener('input',e=>{
-    const v=e.target.value;
-    if(zoomRaf) cancelAnimationFrame(zoomRaf);
-    zoomRaf=requestAnimationFrame(()=>{ applyZoom(v); localStorage.setItem('atZoom',v); });
-  });
-  function applyZoom(v){
-    document.documentElement.style.setProperty('--cell',v+'px');
-    const hide = parseInt(v)<90;
-    if(hide !== _lastHideNames){ document.body.classList.toggle('hide-names', hide); _lastHideNames=hide; }
+  // ── SIZE ──
+  const SIZES = { xs: 70, s: 110, m: 150, l: 220 };
+  function setSize(key){
+    const v = SIZES[key];
+    document.documentElement.style.setProperty('--cell', v+'px');
+    document.body.classList.toggle('hide-names', v < 90);
+    ['xs','s','m','l'].forEach(k => document.getElementById('sz-'+k).classList.toggle('active', k===key));
+    localStorage.setItem('atZoom', key);
   }
+  const savedSize = localStorage.getItem('atZoom') || 'm';
+  // handle old numeric values gracefully
+  const validSize = SIZES[savedSize] ? savedSize : 'm';
+  setSize(validSize);
 
   // ── TINT ──
   const tintToggle = document.getElementById('tint-toggle');
   tintToggle.checked = localStorage.getItem('atTint') !== 'off';
   document.body.classList.toggle('no-tint', !tintToggle.checked);
   tintToggle.addEventListener('change', () => { document.body.classList.toggle('no-tint', !tintToggle.checked); localStorage.setItem('atTint', tintToggle.checked ? 'on' : 'off'); });
+
+  const imgOnlyToggle = document.getElementById('imgonly-toggle');
+  imgOnlyToggle.checked = localStorage.getItem('atImgOnly') === 'on';
+  document.body.classList.toggle('images-only', imgOnlyToggle.checked);
+  imgOnlyToggle.addEventListener('change', () => { document.body.classList.toggle('images-only', imgOnlyToggle.checked); localStorage.setItem('atImgOnly', imgOnlyToggle.checked ? 'on' : 'off'); });
 
   // ── SEARCH ──
   const searchInput = document.getElementById('search-input');
@@ -479,22 +515,21 @@
     try {
       const res = await fetch(ghUrl(), { headers: ghHeaders() });
       if(res.status === 404){
-        // File doesn't exist yet — start fresh
         ghFileSha = null;
         setStatus('synced','Ready');
-        return {statuses:{}, tags:{}};
+        return {statuses:{}, tags:{}, videoLinks:{}};
       }
       if(!res.ok) throw new Error('HTTP '+res.status);
       const json = await res.json();
       ghFileSha = json.sha;
       const raw = JSON.parse(atob(json.content.replace(/\n/g,'')));
       // migrate old flat format
-      if(raw.statuses !== undefined || raw.tags !== undefined) return {statuses: raw.statuses||{}, tags: raw.tags||{}};
-      return {statuses: raw, tags: {}};
+      if(raw.statuses !== undefined || raw.tags !== undefined) return {statuses: raw.statuses||{}, tags: raw.tags||{}, videoLinks: raw.videoLinks||{}};
+      return {statuses: raw, tags: {}, videoLinks: {}};
     } catch(e){
       setStatus('error', 'GitHub error');
       toast('⚠ Could not load from GitHub: '+e.message);
-      return {statuses:{}, tags:{}};
+      return {statuses:{}, tags:{}, videoLinks:{}};
     }
   }
 
@@ -502,7 +537,7 @@
     clearTimeout(saveTimer);
     saveTimer = setTimeout(async ()=>{
       try {
-        const content = btoa(unescape(encodeURIComponent(JSON.stringify({statuses,tags},null,2))));
+        const content = btoa(unescape(encodeURIComponent(JSON.stringify({statuses,tags,videoLinks},null,2))));
         const body = { message: 'Update asset statuses', content };
         if(ghFileSha) body.sha = ghFileSha;
         const res = await fetch(ghUrl(), { method:'PUT', headers: ghHeaders(), body: JSON.stringify(body) });
@@ -526,13 +561,15 @@
     }
     // Load data from GitHub
     const d = await ghLoad();
-    statuses = d.statuses; tags = d.tags;
+    statuses = d.statuses; tags = d.tags; videoLinks = d.videoLinks;
     setStatus('synced','Loaded');
 
     // Try to restore image folder handle
     const imgH = await getH('img');
     const workH = await getH('work');
+    const videoH = await getH('video');
     updateImgBtn(imgH);
+    updateVideoBtn(videoH);
 
     if(imgH){
       try {
@@ -540,11 +577,11 @@
         if(perm === 'granted'){
           activeImgHandle = imgH;
           activeWorkHandle = workH || null;
+          if(videoH){ const vp = await videoH.queryPermission({mode:'read'}); if(vp==='granted'){ activeVideoHandle=videoH; await buildVideoBlobMap(); } }
           await loadImages();
           document.getElementById('btn-scan').disabled = !workH;
           return;
         }
-        // Permission needs re-granting — show slim banner, not a full screen
         showImgBanner(imgH.name);
       } catch(e){ showImgBanner(imgH ? imgH.name : ''); }
     } else {
@@ -710,6 +747,71 @@
     else { btn.textContent = '🖼 Link Images'; }
   }
 
+  function updateVideoBtn(h){
+    const btn = document.getElementById('btn-videos');
+    if(h){ btn.textContent = '🎬 Videos linked'; btn.title = h.name; btn.style.borderColor='var(--blue)'; btn.style.color='var(--blue)'; }
+    else { btn.textContent = '🎬 Link Videos'; btn.style.borderColor=''; btn.style.color=''; }
+  }
+
+  async function linkVideoFolder(){
+    if(!window.showDirectoryPicker){ toast('Requires Chrome or Edge'); return; }
+    try {
+      const h = await showDirectoryPicker({mode:'read'});
+      await saveH('video', h);
+      activeVideoHandle = h;
+      updateVideoBtn(h);
+      await buildVideoBlobMap();
+      toast('✓ Videos linked — auto-matched');
+    } catch(e){ if(e.name !== 'AbortError') toast('Could not open folder'); }
+  }
+
+  async function buildVideoBlobMap(){
+    if(!activeVideoHandle) return;
+    videoBlobMap = {};
+    async function scanDir(dirH){
+      for await(const [name, h] of dirH.entries()){
+        if(h.kind==='file' && /\.(mp4|webm|mov)$/i.test(name)){
+          const base = name.replace(/\.[^/.]+$/,'').toLowerCase();
+          const f = await h.getFile();
+          videoBlobMap[base] = URL.createObjectURL(f);
+        } else if(h.kind==='directory') await scanDir(h);
+      }
+    }
+    await scanDir(activeVideoHandle);
+    // After building, mark all auto-matched images as blue
+    let changed = 0;
+    const videoKeys = Object.keys(videoBlobMap);
+    assets.forEach(cat => cat.items.forEach(item => {
+      const manualVideoName = videoLinks[item.name];
+      if(manualVideoName){
+        const manualBase = manualVideoName.replace(/\.[^/.]+$/,'').toLowerCase();
+        if(videoBlobMap[manualBase] && item.status !== 'blue'){ item.status='blue'; statuses[item.name]='blue'; changed++; }
+        return;
+      }
+      const base = item.name.replace(/\.[^/.]+$/,'').toLowerCase();
+      const stripped = base.replace(/_[\w\d]+$/, '');
+      const hasVideo = !!videoBlobMap[base] || (stripped.length >= 5 && videoKeys.some(k => k.startsWith(stripped)));
+      if(hasVideo && item.status !== 'blue'){ item.status='blue'; statuses[item.name]='blue'; changed++; }
+    }));
+    if(changed){ render(); ghSave(); toast(`🎬 ${changed} illustrations marked animated`); }
+  }
+
+  function getVideoSrc(item){
+    const manualBase = videoLinks[item.name] ? videoLinks[item.name].replace(/\.[^/.]+$/,'').toLowerCase() : null;
+    if(manualBase) return videoBlobMap[manualBase] || null;
+
+    const autoBase = item.name.replace(/\.[^/.]+$/,'').toLowerCase();
+    // 1. Exact match
+    if(videoBlobMap[autoBase]) return videoBlobMap[autoBase];
+    // 2. Strip trailing variant suffix (_3, _v2, _final etc) and try prefix match
+    // e.g. "row 71_ verification_3" → "row 71_ verification"
+    const stripped = autoBase.replace(/_[\w\d]+$/, '');
+    const videoKeys = Object.keys(videoBlobMap);
+    // Find a video whose key starts with the stripped image base
+    const match = videoKeys.find(k => k.startsWith(stripped) && stripped.length >= 5);
+    return match ? videoBlobMap[match] : null;
+  }
+
   // ── LOAD IMAGES ──
   async function collectImages(dirH, arr){
     for await(const [name,h] of dirH.entries()){
@@ -816,18 +918,34 @@
 
   function getAllTags(){const m={};assets.forEach(c=>c.items.forEach(i=>(i.tags||[]).forEach(t=>{m[t]=(m[t]||0)+1;})));return m;}
 
+  let tagListExpanded = false;
+  const TAG_COMPACT_LIMIT = 30;
+
+  function toggleTagExpand(){
+    tagListExpanded = !tagListExpanded;
+    buildTagFilterSidebar();
+  }
+
   function buildTagFilterSidebar(){
     const all=getAllTags(),keys=Object.keys(all).sort();
     const sec=document.getElementById('tag-filter-section'),list=document.getElementById('tag-filter-list');
     if(!keys.length){sec.style.display='none';return;}
     sec.style.display='block'; list.innerHTML='';
-    keys.forEach(t=>{
+    const showAll = tagListExpanded || keys.length <= TAG_COMPACT_LIMIT;
+    const visible = showAll ? keys : keys.slice(0, TAG_COMPACT_LIMIT);
+    visible.forEach(t=>{
       const p=document.createElement('div');
       p.className='tag-pill'+(activeTagFilter===t?' active':'');
       p.innerHTML=esc(t)+' <span class="tp-n">'+all[t]+'</span>';
       p.onclick=()=>{activeTagFilter=activeTagFilter===t?null:t;render();};
       list.appendChild(p);
     });
+    const btn = document.getElementById('tag-expand-btn');
+    if(keys.length > TAG_COMPACT_LIMIT){
+      btn.textContent = showAll ? '▲ less' : `▼ +${keys.length - TAG_COMPACT_LIMIT} more`;
+    } else {
+      btn.textContent = '';
+    }
   }
 
   // ── RENDER ──
@@ -1112,7 +1230,24 @@
   }
 
   function renderQuickLook(item){
-    document.getElementById('ql-img').src = item.src;
+    const videoSrc = getVideoSrc(item);
+    const imgEl = document.getElementById('ql-img');
+    const vidEl = document.getElementById('ql-video');
+    const toggleBtn = document.getElementById('ql-toggle-media');
+
+    imgEl.src = item.src;
+    vidEl.src = videoSrc || '';
+    vidEl.style.display = 'none';
+    imgEl.style.display = '';
+
+    if(videoSrc){
+      toggleBtn.style.display = 'flex';
+      toggleBtn.textContent = '▶';
+      toggleBtn._showingVideo = false;
+    } else {
+      toggleBtn.style.display = 'none';
+    }
+
     document.getElementById('ql-name').textContent = item.name;
     const sr = document.getElementById('ql-status-row');
     if(item.status){
@@ -1125,20 +1260,58 @@
     if(item.tags && item.tags.length){
       item.tags.forEach(t => { const d=document.createElement('div'); d.className='ql-tag'; d.textContent=t; tl.appendChild(d); });
     }
-    // Update counter
     document.getElementById('ql-counter').textContent = qlItems.length > 1 ? `${qlIndex+1} / ${qlItems.length}` : '';
+    // Update link-video button label
+    document.getElementById('ql-link-video').textContent = videoSrc ? '🎬 Relink video' : '＋ Link video';
+    document.getElementById('ql-link-video')._item = item;
   }
 
   function qlNavigate(dir){
     if(!qlItems.length) return;
+    const vidEl = document.getElementById('ql-video');
+    vidEl.pause();
     qlIndex = (qlIndex + dir + qlItems.length) % qlItems.length;
     renderQuickLook(qlItems[qlIndex]);
   }
 
-  document.getElementById('ql-close').onclick = () => document.getElementById('ql-backdrop').classList.remove('open');
+  document.getElementById('ql-close').addEventListener('click', () => { document.getElementById('ql-video').pause(); document.getElementById('ql-backdrop').classList.remove('open'); });
   document.getElementById('ql-backdrop').addEventListener('click', e => { if(e.target===document.getElementById('ql-backdrop')) document.getElementById('ql-backdrop').classList.remove('open'); });
   document.getElementById('ql-prev').onclick = e => { e.stopPropagation(); qlNavigate(-1); };
   document.getElementById('ql-next').onclick = e => { e.stopPropagation(); qlNavigate(1); };
+
+  document.getElementById('ql-toggle-media').onclick = e => {
+    e.stopPropagation();
+    const btn = e.currentTarget;
+    const imgEl = document.getElementById('ql-img');
+    const vidEl = document.getElementById('ql-video');
+    btn._showingVideo = !btn._showingVideo;
+    if(btn._showingVideo){
+      imgEl.style.display = 'none'; vidEl.style.display = ''; vidEl.play();
+      btn.textContent = '🖼';
+    } else {
+      vidEl.pause(); vidEl.style.display = 'none'; imgEl.style.display = '';
+      btn.textContent = '▶';
+    }
+  };
+
+  document.getElementById('ql-link-video').onclick = async e => {
+    e.stopPropagation();
+    const item = e.currentTarget._item;
+    if(!item) return;
+    try {
+      const [fileHandle] = await window.showOpenFilePicker({ types: [{ description: 'Video', accept: { 'video/*': ['.mp4','.webm','.mov'] } }] });
+      const file = await fileHandle.getFile();
+      const base = file.name.replace(/\.[^/.]+$/,'').toLowerCase();
+      videoBlobMap[base] = URL.createObjectURL(file);
+      videoLinks[item.name] = file.name;
+      // Mark as blue
+      if(item.status !== 'blue'){ item.status = 'blue'; statuses[item.name] = 'blue'; }
+      ghSave(); render();
+      renderQuickLook(item);
+      toast('✓ Video linked to ' + item.name);
+    } catch(e){ if(e.name !== 'AbortError') toast('Could not open file'); }
+  };
+
   document.getElementById('ql-download').onclick = e => {
     e.stopPropagation();
     const img = document.getElementById('ql-img');
