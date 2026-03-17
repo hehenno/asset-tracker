@@ -2445,7 +2445,9 @@
       "car"
     ],
     "XL_Van_Pets.png": [
-      "xl"
+      "xl",
+      "car",
+      "cog"
     ]
   },
   "videoLinks": {}
