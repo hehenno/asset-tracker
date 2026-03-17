@@ -2028,7 +2028,8 @@
     ],
     "Normal Car_Childseat.png": [
       "car",
-      "kids"
+      "kids",
+      "child"
     ]
   },
   "videoLinks": {}
