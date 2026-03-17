@@ -1223,7 +1223,9 @@
       "location"
     ],
     "Row 48_ Pet-friendly (Cat).png": [
-      "animals"
+      "animals",
+      "cat",
+      "pets"
     ]
   },
   "videoLinks": {}
