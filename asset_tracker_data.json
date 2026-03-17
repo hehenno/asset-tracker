@@ -1744,7 +1744,8 @@
     ],
     "Row 352 Business payment method failed.png": [
       "wallet",
-      "money"
+      "money",
+      "error"
     ]
   },
   "videoLinks": {}
