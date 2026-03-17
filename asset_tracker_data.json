@@ -1251,7 +1251,9 @@
       "lightning"
     ],
     "Row 56 Set pick-up Location_1.png": [
-      "location"
+      "location",
+      "map",
+      "hand"
     ]
   },
   "videoLinks": {}
