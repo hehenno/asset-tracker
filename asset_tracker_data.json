@@ -2605,7 +2605,9 @@
       "bicycle"
     ],
     "Row 159 Woman + Car 1 (no windows).png": [
-      "woman"
+      "woman",
+      "man",
+      "car"
     ]
   },
   "videoLinks": {}
