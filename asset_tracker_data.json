@@ -2449,7 +2449,11 @@
       "car",
       "cog",
       "cat",
-      "animals"
+      "animals",
+      "pets"
+    ],
+    "Malaysia (Female Driver).png": [
+      "driver"
     ]
   },
   "videoLinks": {}
