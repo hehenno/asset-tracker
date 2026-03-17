@@ -2263,7 +2263,11 @@
     ],
     "Row 34 Premium Taxi.png": [
       "car",
-      "premium"
+      "premium",
+      "taxi"
+    ],
+    "Row 35 Paris Taxi Off X.png": [
+      "car"
     ]
   },
   "videoLinks": {}
