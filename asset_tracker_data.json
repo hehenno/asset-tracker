@@ -1977,7 +1977,11 @@
       "car"
     ],
     "Chauffeur SUV_Top.png": [
-      "suv"
+      "suv",
+      "car"
+    ],
+    "Chauffeur XXL_2.png": [
+      "chauffeur"
     ]
   },
   "videoLinks": {}
