@@ -1783,7 +1783,8 @@
     ],
     "Row 361 Traffic Light Red.png": [
       "traffic",
-      "light"
+      "light",
+      "environment"
     ]
   },
   "videoLinks": {}
