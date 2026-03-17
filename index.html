@@ -247,9 +247,9 @@
     body.edit-mode #btn-edit { background: var(--yellow-dim); border-color: var(--yellow); color: var(--yellow); font-weight: 600; }
     body.edit-mode .asset-item { cursor: pointer; }
     body:not(.edit-mode) .asset-item { cursor: pointer; }
-    body:not(.edit-mode) .tag-btn { display: none !important; }
-
-    /* PASSWORD MODAL */
+    .ql-btn { display: none; position: absolute; top: 4px; right: 4px; width: 20px; height: 20px; border-radius: 50%; background: var(--surface2); border: 1px solid var(--border); color: var(--muted); font-size: 12px; cursor: pointer; align-items: center; justify-content: center; z-index: 5; transition: all 0.15s; }
+    body.edit-mode .asset-item:hover .ql-btn { display: flex; }
+    .ql-btn:hover { border-color: var(--accent); color: var(--accent); }
     #pw-backdrop { display: none; position: fixed; inset: 0; z-index: 300; background: rgba(0,0,0,0.8); backdrop-filter: blur(6px); align-items: center; justify-content: center; }
     #pw-backdrop.open { display: flex; }
     #pw-box { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 32px 28px; width: 340px; max-width: 90vw; position: relative; text-align: center; }
@@ -277,11 +277,18 @@
     #ql-status-row { display: flex; align-items: center; gap: 8px; font-size: 0.72rem; }
     .ql-status-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
     #ql-toggle-media { display: none; position: absolute; bottom: 14px; left: 50px; background: var(--surface2); border: 1px solid var(--border); color: var(--muted); font-size: 1rem; width: 30px; height: 30px; border-radius: 6px; cursor: pointer; align-items: center; justify-content: center; transition: border-color 0.15s, color 0.15s; }
-    #ql-link-video { display: none; background: none; border: 1px dashed var(--border); color: var(--muted); font-size: 0.68rem; padding: 5px 12px; border-radius: var(--radius); cursor: pointer; transition: border-color 0.15s, color 0.15s; margin-top: 2px; }
+    #ql-tag-row { width: 100%; }
+    #ql-tag-input { width: 100%; box-sizing: border-box; padding: 7px 12px; background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius); color: var(--text); font-family: 'DM Mono', monospace; font-size: 0.75rem; outline: none; transition: border-color 0.15s; }
+    #ql-tag-input:focus { border-color: var(--accent); }
+    #ql-tag-input::placeholder { color: var(--muted); }
+    #ql-link-video { display: none; background: none; border: 1px solid var(--border); color: var(--muted); font-size: 0.68rem; padding: 5px 16px; border-radius: 20px; cursor: pointer; transition: border-color 0.15s, color 0.15s; font-family: 'DM Mono', monospace; }
     #ql-link-video:hover { border-color: var(--blue); color: var(--blue); }
-    body.edit-mode #ql-link-video { display: inline-flex; }
+    body.edit-mode #ql-link-video { display: inline-block; }
     #ql-tags { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; }
-    .ql-tag { padding: 3px 10px; border-radius: 20px; background: var(--accent-dim); border: 1px solid var(--accent); color: var(--accent); font-size: 0.68rem; }
+    .ql-tag { padding: 3px 10px; border-radius: 20px; background: var(--accent-dim); border: 1px solid var(--accent); color: var(--accent); font-size: 0.68rem; display: flex; align-items: center; gap: 5px; }
+    .ql-tag-del { background: none; border: none; color: var(--accent); cursor: pointer; font-size: 0.75rem; padding: 0; line-height: 1; opacity: 0.6; display: none; }
+    .ql-tag-del:hover { opacity: 1; }
+    body.edit-mode .ql-tag-del { display: inline; }
     #ql-nav { display: flex; align-items: center; gap: 16px; margin-top: 4px; }
     #ql-prev, #ql-next { background: var(--surface2); border: 1px solid var(--border); color: var(--text); font-size: 1rem; width: 34px; height: 34px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: border-color 0.15s, background 0.15s; }
     #ql-prev:hover, #ql-next:hover { border-color: var(--accent); background: var(--accent-dim); color: var(--accent); }
@@ -294,6 +301,7 @@
     body.images-only .status-pip { display: none !important; }
     body.images-only .tag-btn { display: none !important; }
     body.images-only .asset-item { border-color: transparent !important; background: transparent !important; }
+    body.no-dot .status-pip { display: none !important; }
 
     mark { background: rgba(181,255,90,0.2); color: var(--accent); border-radius: 2px; padding: 0 1px; }
   </style>
@@ -348,6 +356,10 @@
       <div class="toggle-row">
         <span>Status tint</span>
         <label class="toggle-switch"><input type="checkbox" id="tint-toggle" checked><span class="toggle-track"></span></label>
+      </div>
+      <div class="toggle-row" style="margin-top:8px">
+        <span>Status dot</span>
+        <label class="toggle-switch"><input type="checkbox" id="dot-toggle" checked><span class="toggle-track"></span></label>
       </div>
     </div>
     <div class="ss">
@@ -424,6 +436,9 @@
     <div id="ql-name"></div>
     <div id="ql-status-row"></div>
     <div id="ql-tags"></div>
+    <div id="ql-tag-row" style="display:none">
+      <input type="text" id="ql-tag-input" placeholder="Type a tag and press Enter…" autocomplete="off">
+    </div>
     <div id="ql-nav">
       <button id="ql-prev">←</button>
       <span id="ql-counter"></span>
@@ -470,9 +485,16 @@
     document.body.classList.toggle('hide-names', v < 90);
     ['xs','s','m','l'].forEach(k => document.getElementById('sz-'+k).classList.toggle('active', k===key));
     localStorage.setItem('atZoom', key);
+    // Auto-switch dot/tint defaults per size (only if user hasn't manually set them)
+    if(!localStorage.getItem('atDot') && !localStorage.getItem('atTint')){
+      const dotOn = key !== 'xs';
+      document.getElementById('dot-toggle').checked = dotOn;
+      document.body.classList.toggle('no-dot', !dotOn);
+      document.getElementById('tint-toggle').checked = true;
+      document.body.classList.remove('no-tint');
+    }
   }
   const savedSize = localStorage.getItem('atZoom') || 'm';
-  // handle old numeric values gracefully
   const validSize = SIZES[savedSize] ? savedSize : 'm';
   setSize(validSize);
 
@@ -481,6 +503,16 @@
   tintToggle.checked = localStorage.getItem('atTint') !== 'off';
   document.body.classList.toggle('no-tint', !tintToggle.checked);
   tintToggle.addEventListener('change', () => { document.body.classList.toggle('no-tint', !tintToggle.checked); localStorage.setItem('atTint', tintToggle.checked ? 'on' : 'off'); });
+
+  // ── DOT ──
+  const dotToggle = document.getElementById('dot-toggle');
+  if(localStorage.getItem('atDot') !== null){
+    dotToggle.checked = localStorage.getItem('atDot') !== 'off';
+  } else {
+    dotToggle.checked = validSize !== 'xs';
+  }
+  document.body.classList.toggle('no-dot', !dotToggle.checked);
+  dotToggle.addEventListener('change', () => { document.body.classList.toggle('no-dot', !dotToggle.checked); localStorage.setItem('atDot', dotToggle.checked ? 'on' : 'off'); });
 
   const imgOnlyToggle = document.getElementById('imgonly-toggle');
   imgOnlyToggle.checked = localStorage.getItem('atImgOnly') === 'on';
@@ -993,6 +1025,9 @@
         const tb=document.createElement('button'); tb.className='tag-btn'; tb.textContent='#'; tb.title='Edit tags';
         tb.onclick=e=>{e.stopPropagation();openTagModal(ci,idx);};
 
+        const qlb=document.createElement('button'); qlb.className='ql-btn'; qlb.textContent='⌕'; qlb.title='Quick look';
+        qlb.onclick=e=>{e.stopPropagation();openQuickLook(item);};
+
         const img=document.createElement('img'); img.src=item.src; img.loading='lazy';
 
         const nameEl=document.createElement('div'); nameEl.className='asset-name';
@@ -1010,7 +1045,7 @@
         pip.className='status-pip'+(item.status?' pip-'+item.status:'');
 
         div.onclick=()=>{ if(editMode) toggleStatus(ci,idx); else openQuickLook(item); };
-        div.appendChild(tb); div.appendChild(img);
+        div.appendChild(tb); div.appendChild(qlb); div.appendChild(img);
         div.appendChild(nameEl); div.appendChild(tagsEl); div.appendChild(pip);
         gallery.appendChild(div);
       });
@@ -1086,7 +1121,6 @@
 
   // ── TAG MODAL ──
   function openTagModal(ci,ii){
-    if(!editMode){ openQuickLook(assets[ci].items[ii]); return; }
     tagTarget={ci,ii};
     const item=assets[ci].items[ii];
     document.getElementById('tm-file').textContent=item.name;
@@ -1258,12 +1292,17 @@
     const tl = document.getElementById('ql-tags');
     tl.innerHTML = '';
     if(item.tags && item.tags.length){
-      item.tags.forEach(t => { const d=document.createElement('div'); d.className='ql-tag'; d.textContent=t; tl.appendChild(d); });
+      item.tags.forEach(t => { const d=document.createElement('div'); d.className='ql-tag'; d.textContent=t; const x=document.createElement('button'); x.className='ql-tag-del'; x.textContent='×'; x.onclick=()=>qlRemoveTag(item,t); d.appendChild(x); tl.appendChild(d); });
     }
     document.getElementById('ql-counter').textContent = qlItems.length > 1 ? `${qlIndex+1} / ${qlItems.length}` : '';
     // Update link-video button label
     document.getElementById('ql-link-video').textContent = videoSrc ? '🎬 Relink video' : '＋ Link video';
     document.getElementById('ql-link-video')._item = item;
+    // Show inline tag input in edit mode
+    document.getElementById('ql-tag-row').style.display = editMode ? 'block' : 'none';
+    document.getElementById('ql-tag-input').value = '';
+    document.getElementById('ql-tag-input')._item = item;
+    if(editMode) setTimeout(()=>document.getElementById('ql-tag-input').focus(), 80);
   }
 
   function qlNavigate(dir){
@@ -1276,7 +1315,39 @@
 
   document.getElementById('ql-close').addEventListener('click', () => { document.getElementById('ql-video').pause(); document.getElementById('ql-backdrop').classList.remove('open'); });
   document.getElementById('ql-backdrop').addEventListener('click', e => { if(e.target===document.getElementById('ql-backdrop')) document.getElementById('ql-backdrop').classList.remove('open'); });
-  document.getElementById('ql-prev').onclick = e => { e.stopPropagation(); qlNavigate(-1); };
+  function qlRemoveTag(item, tag){
+    item.tags = (item.tags||[]).filter(t=>t!==tag);
+    if(item.tags.length) tags[item.name]=[...item.tags]; else delete tags[item.name];
+    const tl=document.getElementById('ql-tags'); tl.innerHTML='';
+    item.tags.forEach(t=>{ const d=document.createElement('div'); d.className='ql-tag'; d.textContent=t; const x=document.createElement('button'); x.className='ql-tag-del'; x.textContent='×'; x.onclick=()=>qlRemoveTag(item,t); d.appendChild(x); tl.appendChild(d); });
+    ghSave();
+  }
+
+  document.getElementById('ql-tag-input').addEventListener('keydown', e => {
+    const input = e.currentTarget;
+    const item = input._item;
+    if(e.key === 'Enter'){
+      e.stopPropagation();
+      const val = input.value.trim().toLowerCase().replace(/\s+/g,' ');
+      if(!val || !item) return;
+      if(!item.tags) item.tags = [];
+      if(!item.tags.includes(val)){
+        item.tags.push(val);
+        tags[item.name] = [...item.tags];
+        // re-render tags in quick look
+        const tl = document.getElementById('ql-tags'); tl.innerHTML='';
+        item.tags.forEach(t=>{ const d=document.createElement('div'); d.className='ql-tag'; d.textContent=t; const x=document.createElement('button'); x.className='ql-tag-del'; x.textContent='×'; x.onclick=()=>qlRemoveTag(item,t); d.appendChild(x); tl.appendChild(d); });
+        ghSave();
+      }
+      input.value = '';
+    } else if((e.key === 'ArrowLeft' || e.key === 'ArrowRight') && input.value === ''){
+      // Navigate when input is empty
+      e.preventDefault();
+      qlNavigate(e.key === 'ArrowLeft' ? -1 : 1);
+    } else {
+      e.stopPropagation(); // prevent arrow keys from navigating while typing
+    }
+  });
   document.getElementById('ql-next').onclick = e => { e.stopPropagation(); qlNavigate(1); };
 
   document.getElementById('ql-toggle-media').onclick = e => {
