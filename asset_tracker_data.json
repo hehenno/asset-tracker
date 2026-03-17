@@ -1253,7 +1253,8 @@
     "Row 56 Set pick-up Location_1.png": [
       "location",
       "map",
-      "hand"
+      "hand",
+      "hands"
     ]
   },
   "videoLinks": {}
