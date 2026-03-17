@@ -2541,7 +2541,9 @@
     ],
     "Row 103 Are you ordering a ride for someone else_3.png": [
       "man",
-      "woman"
+      "woman",
+      "human",
+      "wave"
     ]
   },
   "videoLinks": {}
