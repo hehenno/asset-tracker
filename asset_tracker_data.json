@@ -1181,6 +1181,9 @@
       "house",
       "shop",
       "cafe"
+    ],
+    "Preparation_Night.png": [
+      "house"
     ]
   },
   "videoLinks": {}
