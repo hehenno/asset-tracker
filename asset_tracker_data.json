@@ -2243,7 +2243,11 @@
       "xxl"
     ],
     "Row 32 XXL Yellow Taxi Top.png": [
-      "car"
+      "car",
+      "xxl"
+    ],
+    "Row 33 Comfort Taxi Off X.png": [
+      "comfort"
     ]
   },
   "videoLinks": {}
