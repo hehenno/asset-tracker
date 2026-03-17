@@ -2013,7 +2013,11 @@
       "car"
     ],
     "Little_Bolt_TOP.png": [
-      "xs"
+      "xs",
+      "car"
+    ],
+    "Mi Taxi.png": [
+      "car"
     ]
   },
   "videoLinks": {}
