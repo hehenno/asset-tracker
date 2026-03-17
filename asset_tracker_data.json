@@ -1768,7 +1768,8 @@
       "icon"
     ],
     "Row 356 Extra Icon.png": [
-      "warning"
+      "warning",
+      "error"
     ]
   },
   "videoLinks": {}
