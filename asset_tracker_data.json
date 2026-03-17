@@ -2142,7 +2142,11 @@
       "car"
     ],
     "Row 10 Basic XL Car.png": [
-      "car"
+      "car",
+      "xl"
+    ],
+    "Row 11 Scooter Off X.png": [
+      "scootere"
     ]
   },
   "videoLinks": {}
