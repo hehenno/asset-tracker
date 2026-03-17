@@ -1344,7 +1344,13 @@
       "icon"
     ],
     "Row 89_ Bolt plus (Solo).png": [
-      "plus"
+      "plus",
+      "icon"
+    ],
+    "Row 89_ Bolt Plus_3.png": [
+      "plus",
+      "car",
+      "ride"
     ]
   },
   "videoLinks": {}
