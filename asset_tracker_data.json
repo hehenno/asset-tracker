@@ -2059,7 +2059,11 @@
     "Price Bidding Category Icon.png": [
       "chat",
       "support",
-      "bubbles"
+      "bubbles",
+      "car"
+    ],
+    "Ramadan.png": [
+      "car"
     ]
   },
   "videoLinks": {}
