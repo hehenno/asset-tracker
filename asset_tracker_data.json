@@ -1775,6 +1775,9 @@
     "Row 360 Parking traffic sign.png": [
       "parking",
       "environment"
+    ],
+    "Row 361 Traffic Light Green.png": [
+      "traffic"
     ]
   },
   "videoLinks": {}
