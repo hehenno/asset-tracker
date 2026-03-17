@@ -1777,7 +1777,9 @@
       "environment"
     ],
     "Row 361 Traffic Light Green.png": [
-      "traffic"
+      "traffic",
+      "light",
+      "environment"
     ]
   },
   "videoLinks": {}
