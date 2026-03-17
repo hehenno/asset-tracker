@@ -2258,7 +2258,11 @@
     ],
     "Row 34 Premium Taxi Off X.png": [
       "taxi",
-      "premium"
+      "premium",
+      "car"
+    ],
+    "Row 34 Premium Taxi.png": [
+      "car"
     ]
   },
   "videoLinks": {}
