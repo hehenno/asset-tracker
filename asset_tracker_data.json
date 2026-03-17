@@ -1525,7 +1525,9 @@
       "shield"
     ],
     "Row 330 Bolt Business voucher_coupon.png": [
-      "business"
+      "business",
+      "bag",
+      "coupon"
     ]
   },
   "videoLinks": {}
