@@ -1822,7 +1822,8 @@
       "hand",
       "phone",
       "id",
-      "identification"
+      "identification",
+      "verification"
     ]
   },
   "videoLinks": {}
