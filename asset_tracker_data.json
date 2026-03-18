@@ -107,7 +107,6 @@
     "Row 119 Fast Delivery with icon.png": "red",
     "Row 119 Fast Delivery.png": "green",
     "Row 120_ Breakfast.png": "green",
-    "Row 121 Groceries with bag.png": "red",
     "Row 122 Groceries (without bag, delivery).png": "green",
     "Row 124_ Alcohol.png": "red",
     "Row 125_ Bakery.png": "green",
@@ -742,7 +741,8 @@
     "Bolt Tours (1).png": "red",
     "Price Bidding Category Icon.png": "red",
     "0_Easter_Eggs in Basket.png": "green",
-    "Row 127_ Convenience products.png": "green"
+    "Row 127_ Convenience products.png": "green",
+    "Row 121 Groceries with bag.png": "green"
   },
   "tags": {
     "Row 123 Groceries (basket).png": [
