@@ -3234,7 +3234,12 @@
     ],
     "Chauffeur XXL_1.png": [
       "car",
-      "xxl"
+      "xxl",
+      "chauffeur"
+    ],
+    "Chauffeur XXL_Top.png": [
+      "car",
+      "chauffeur"
     ]
   },
   "videoLinks": {}
