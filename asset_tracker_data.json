@@ -3286,7 +3286,9 @@
       "bike"
     ],
     "Normal Car_Pets.png": [
-      "car"
+      "car",
+      "pets",
+      "animals"
     ]
   },
   "videoLinks": {}
