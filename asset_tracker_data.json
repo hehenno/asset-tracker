@@ -3284,6 +3284,9 @@
     "Normal Car_BikeStorage.png": [
       "car",
       "bike"
+    ],
+    "Normal Car_Pets.png": [
+      "car"
     ]
   },
   "videoLinks": {}
