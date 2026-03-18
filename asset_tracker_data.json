@@ -2063,7 +2063,8 @@
       "support",
       "bubbles",
       "car",
-      "price"
+      "price",
+      "money"
     ],
     "Ramadan.png": [
       "car"
