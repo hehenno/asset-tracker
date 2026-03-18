@@ -3067,7 +3067,8 @@
       "security"
     ],
     "Row 385 Allow location services access.png": [
-      "map"
+      "map",
+      "location"
     ]
   },
   "videoLinks": {}
