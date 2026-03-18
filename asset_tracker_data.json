@@ -112,7 +112,6 @@
     "Row 124_ Alcohol.png": "red",
     "Row 125_ Bakery.png": "green",
     "Row 126_ Books.png": "red",
-    "Row 127_ Convenience products.png": "red",
     "Row 128_ Flowers.png": "green",
     "Row 129_ Gifts.png": "red",
     "Row 130_ Health and beauty.png": "red",
@@ -742,7 +741,8 @@
     "Row 364 Hands up in celebration with confetti 2.png": "red",
     "Bolt Tours (1).png": "red",
     "Price Bidding Category Icon.png": "red",
-    "0_Easter_Eggs in Basket.png": "green"
+    "0_Easter_Eggs in Basket.png": "green",
+    "Row 127_ Convenience products.png": "green"
   },
   "tags": {
     "Row 123 Groceries (basket).png": [
