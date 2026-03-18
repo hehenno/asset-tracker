@@ -2890,7 +2890,9 @@
       "business",
       "briefcase",
       "bag",
-      "money"
+      "money",
+      "card",
+      "payment"
     ]
   },
   "videoLinks": {}
