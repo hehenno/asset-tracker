@@ -3071,7 +3071,8 @@
       "location"
     ],
     "Row 388 Ride ended automatically.png": [
-      "card"
+      "card",
+      "error"
     ]
   },
   "videoLinks": {}
