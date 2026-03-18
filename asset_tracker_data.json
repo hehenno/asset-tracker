@@ -3433,6 +3433,10 @@
     ],
     "Row 22 Parcel delivery using car.png": [
       "package",
+      "parcel",
+      "car"
+    ],
+    "Row 23 Parcel delivery using XL car.png": [
       "parcel"
     ]
   },
