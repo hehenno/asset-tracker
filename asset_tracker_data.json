@@ -271,7 +271,6 @@
     "0_Easter Ear_Car_Top.png": "green",
     "0_Easter Egg_Car_Off X.png": "red",
     "0_Easter Egg_Car_Top.png": "green",
-    "0_Easter_Eggs in Basket.png": "blue",
     "0_Pin Dark Pink.png": "red",
     "0_Romania_XS_OffX.png": "red",
     "0_Romania_XS_Top.png": "green",
@@ -742,7 +741,8 @@
     "Delivery in progress_1.png": "red",
     "Row 364 Hands up in celebration with confetti 2.png": "red",
     "Bolt Tours (1).png": "red",
-    "Price Bidding Category Icon.png": "red"
+    "Price Bidding Category Icon.png": "red",
+    "0_Easter_Eggs in Basket.png": "green"
   },
   "tags": {
     "Row 123 Groceries (basket).png": [
