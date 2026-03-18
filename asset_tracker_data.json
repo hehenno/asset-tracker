@@ -2923,7 +2923,11 @@
       "icon"
     ],
     "Row 344 Favorite place 1.png": [
-      "hand"
+      "hand",
+      "heart"
+    ],
+    "Row 347 Credit card.png": [
+      "card"
     ]
   },
   "videoLinks": {}
