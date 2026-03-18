@@ -3228,7 +3228,9 @@
       "chauffeur"
     ],
     "Chauffeur SUV_2.png": [
-      "car"
+      "car",
+      "suv",
+      "chauffeur"
     ]
   },
   "videoLinks": {}
