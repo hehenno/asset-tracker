@@ -3503,7 +3503,9 @@
       "taxi"
     ],
     "Row 31 XL Yellow Taxi Side.png": [
-      "car"
+      "car",
+      "taxi",
+      "xl"
     ]
   },
   "videoLinks": {}
