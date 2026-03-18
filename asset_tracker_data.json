@@ -3613,7 +3613,9 @@
       "taxi"
     ],
     "Row 45 XL Lisbon Taxi Off X.png": [
-      "car"
+      "car",
+      "taxi",
+      "xl"
     ]
   },
   "videoLinks": {}
