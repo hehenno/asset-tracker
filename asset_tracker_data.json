@@ -3497,6 +3497,9 @@
     "Row 30 Yellow Taxi Side.png": [
       "car",
       "taxi"
+    ],
+    "Row 30 Yellow Taxi.png": [
+      "car"
     ]
   },
   "videoLinks": {}
