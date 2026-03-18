@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Asset Tracker</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:wght@600;800&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
       --bg: #0f0f0f; --surface: #191919; --surface2: #222;
@@ -27,7 +27,7 @@
       border-bottom: 1px solid var(--border);
       padding: 0 24px; display: flex; align-items: center; gap: 12px; height: 56px;
     }
-    #topbar h1 { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.1rem; letter-spacing: -0.02em; color: var(--accent); white-space: nowrap; }
+    #topbar h1 { font-family: 'Inter', sans-serif; font-weight: 800; font-size: 1.1rem; letter-spacing: -0.03em; color: var(--accent); white-space: nowrap; }
     .divider { width: 1px; height: 24px; background: var(--border); flex-shrink: 0; }
     .spacer { flex: 1; }
 
@@ -309,7 +309,7 @@
 <body>
 
 <div id="topbar">
-  <h1>Asset Tracker</h1>
+  <h1>Illustration Tracker</h1>
   <div class="divider"></div>
   <div id="search-wrap">
     <input type="text" style="display:none" aria-hidden="true">
@@ -565,24 +565,40 @@
     }
   }
 
+  let ghSavePromise = Promise.resolve();
   function ghSave(){
     clearTimeout(saveTimer);
-    saveTimer = setTimeout(async ()=>{
-      try {
-        const content = btoa(unescape(encodeURIComponent(JSON.stringify({statuses,tags,videoLinks},null,2))));
-        const body = { message: 'Update asset statuses', content };
-        if(ghFileSha) body.sha = ghFileSha;
-        const res = await fetch(ghUrl(), { method:'PUT', headers: ghHeaders(), body: JSON.stringify(body) });
-        if(!res.ok) throw new Error('HTTP '+res.status);
-        const json = await res.json();
-        ghFileSha = json.content.sha;
-        setStatus('synced','Saved');
-      } catch(e){
-        console.error('[ghSave]', e);
-        setStatus('error','Save failed');
-        toast('⚠ Could not save to GitHub: '+e.message);
-      }
-    }, 600);
+    saveTimer = setTimeout(()=>{
+      ghSavePromise = ghSavePromise.then(async ()=>{
+        try {
+          setStatus('saving','Saving…');
+          const content = btoa(unescape(encodeURIComponent(JSON.stringify({statuses,tags,videoLinks},null,2))));
+          const body = { message: 'Update asset statuses', content };
+          if(ghFileSha) body.sha = ghFileSha;
+          const res = await fetch(ghUrl(), { method:'PUT', headers: ghHeaders(), body: JSON.stringify(body) });
+          if(res.status === 409){
+            // SHA conflict — fetch latest SHA and retry once
+            const fresh = await fetch(ghUrl(), { headers: ghHeaders() });
+            if(fresh.ok){ const fj = await fresh.json(); ghFileSha = fj.sha; }
+            const body2 = { message: 'Update asset statuses', content };
+            if(ghFileSha) body2.sha = ghFileSha;
+            const res2 = await fetch(ghUrl(), { method:'PUT', headers: ghHeaders(), body: JSON.stringify(body2) });
+            if(!res2.ok) throw new Error('HTTP '+res2.status);
+            const json2 = await res2.json();
+            ghFileSha = json2.content.sha;
+          } else {
+            if(!res.ok) throw new Error('HTTP '+res.status);
+            const json = await res.json();
+            ghFileSha = json.content.sha;
+          }
+          setStatus('synced','Saved');
+        } catch(e){
+          console.error('[ghSave]', e);
+          setStatus('error','Save failed');
+          toast('⚠ Could not save: '+e.message);
+        }
+      });
+    }, 800);
   }
 
   // ── INIT ──
