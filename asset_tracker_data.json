@@ -3746,7 +3746,8 @@
     ],
     "XL_Van_Childseat.png": [
       "car",
-      "xl"
+      "xl",
+      "child"
     ]
   },
   "videoLinks": {}
