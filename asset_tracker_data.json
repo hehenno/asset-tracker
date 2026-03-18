@@ -3280,6 +3280,9 @@
     "Motorbike.png": [
       "motorbike",
       "motorcycle"
+    ],
+    "Normal Car_BikeStorage.png": [
+      "car"
     ]
   },
   "videoLinks": {}
