@@ -3178,6 +3178,9 @@
     "0_Taxi Red Roof_Cream_Iso.png": [
       "car",
       "taxi"
+    ],
+    "0_Taxi Red Roof_Cream_Side.png": [
+      "car"
     ]
   },
   "videoLinks": {}
