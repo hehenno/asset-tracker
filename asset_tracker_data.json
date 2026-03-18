@@ -3048,7 +3048,11 @@
       "light"
     ],
     "Row 362 The planet.png": [
-      "earth"
+      "earth",
+      "icon"
+    ],
+    "Row 363 Smartphone in hand 2.png": [
+      "phone"
     ]
   },
   "videoLinks": {}
