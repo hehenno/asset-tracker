@@ -948,7 +948,12 @@
   function itemVisible(item){
     if(activeFilter.size>0&&!activeFilter.has(item.status||null)) return false;
     if(activeTagFilter&&!(item.tags||[]).includes(activeTagFilter)) return false;
-    if(searchQuery&&!item.name.toLowerCase().includes(searchQuery)&&!(item.tags||[]).some(t=>t.toLowerCase().includes(searchQuery))) return false;
+    if(searchQuery){
+      const words = searchQuery.split(/\s+/).filter(Boolean);
+      const itemTags = (item.tags||[]).map(t=>t.toLowerCase());
+      const itemName = item.name.toLowerCase();
+      if(!words.every(w => itemName.includes(w) || itemTags.some(t=>t.includes(w)))) return false;
+    }
     return true;
   }
 
