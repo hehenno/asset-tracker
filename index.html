@@ -471,10 +471,13 @@
   const hasCfg = () => getCfg('token') && getCfg('repo') && getCfg('path');
 
   // ── INDEXEDDB (image folder handle only) ──
-  const dbP = new Promise(res => { try { const r=indexedDB.open('AssetTrackerV3',1); r.onupgradeneeded=e=>e.target.result.createObjectStore('h'); r.onsuccess=e=>res(e.target.result); r.onerror=()=>res(null); } catch{res(null);} });
+  const dbP = new Promise(res => { try { const r=indexedDB.open('AssetTrackerV4',1); r.onupgradeneeded=e=>{ const db=e.target.result; if(!db.objectStoreNames.contains('h')) db.createObjectStore('h'); if(!db.objectStoreNames.contains('thumbs')) db.createObjectStore('thumbs'); }; r.onsuccess=e=>res(e.target.result); r.onerror=()=>res(null); } catch{res(null);} });
   async function saveH(k,v){try{const db=await dbP;if(!db)return;db.transaction('h','readwrite').objectStore('h').put(v,k);}catch{}}
   async function getH(k){try{const db=await dbP;if(!db)return null;return new Promise(r=>{const q=db.transaction('h').objectStore('h').get(k);q.onsuccess=()=>r(q.result);q.onerror=()=>r(null)});}catch{return null;}}
   async function clearH(){try{const db=await dbP;if(!db)return;db.transaction('h','readwrite').objectStore('h').clear();}catch{}}
+  async function getThumb(k){try{const db=await dbP;if(!db)return null;return new Promise(r=>{const q=db.transaction('thumbs').objectStore('thumbs').get(k);q.onsuccess=()=>r(q.result||null);q.onerror=()=>r(null)});}catch{return null;}}
+  async function saveThumb(k,blob){try{const db=await dbP;if(!db)return;db.transaction('thumbs','readwrite').objectStore('thumbs').put(blob,k);}catch{}}
+  async function clearThumbs(){try{const db=await dbP;if(!db)return;db.transaction('thumbs','readwrite').objectStore('thumbs').clear();}catch{}}
 
   // ── ZOOM ──
   // ── SIZE ──
@@ -866,10 +869,27 @@
       if(h.kind==='file'){
         const f = await h.getFile();
         if(f.type.startsWith('image/'))
-          arr.push({name:f.name, src:URL.createObjectURL(f), status:statuses[f.name]||null, tags:[...(tags[f.name]||[])]});
+          arr.push({name:f.name, src:null, fullSrc:URL.createObjectURL(f), fileRef:f, status:statuses[f.name]||null, tags:[...(tags[f.name]||[])]});
       } else if(h.kind==='directory') await collectImages(h, arr);
     }
   }
+
+  async function generateThumb(file, maxSize=220){
+    return new Promise(res=>{
+      const img=new Image(); img.onload=()=>{
+        const scale=Math.min(1, maxSize/Math.max(img.width,img.height));
+        const w=Math.round(img.width*scale), h=Math.round(img.height*scale);
+        const c=document.createElement('canvas'); c.width=w; c.height=h;
+        const ctx=c.getContext('2d');
+        ctx.clearRect(0,0,w,h); // keep transparent
+        ctx.drawImage(img,0,0,w,h);
+        // Use webp for smaller size with transparency, fall back to png
+        c.toBlob(b=>{ if(b) res(b); else c.toBlob(b2=>res(b2),'image/png'); },'image/webp',0.85);
+      }; img.onerror=()=>res(null);
+      img.src=URL.createObjectURL(file);
+    });
+  }
+
   async function loadImages(){
     setStatus('saving','Loading images…');
     assets = [];
@@ -881,8 +901,42 @@
       }
     }
     assets.sort((a,b)=>a.categoryName.localeCompare(b.categoryName));
+
+    // Load cached thumbs first — fast
+    let thumbMisses = [];
+    await Promise.all(assets.flatMap(cat=>cat.items.map(async item=>{
+      const blob = await getThumb(item.name);
+      if(blob){ item.src = URL.createObjectURL(blob); }
+      else { item.src = item.fullSrc; thumbMisses.push(item); }
+    })));
+
     setStatus('synced','Ready');
     render();
+
+    // Generate missing thumbs in background batches
+    if(thumbMisses.length){
+      setStatus('saving', `Generating ${thumbMisses.length} thumbnails…`);
+      let done=0;
+      const BATCH=8;
+      for(let i=0;i<thumbMisses.length;i+=BATCH){
+        const batch=thumbMisses.slice(i,i+BATCH);
+        await Promise.all(batch.map(async item=>{
+          const blob = await generateThumb(item.fileRef);
+          if(!blob) return;
+          await saveThumb(item.name, blob);
+          const thumbUrl = URL.createObjectURL(blob);
+          // Swap src in DOM without re-render
+          item.src = thumbUrl;
+          const imgEl = document.querySelector(`.asset-item[data-ci][data-ii] img, .gallery img`);
+          // Find the right img element by iterating assets
+          assets.forEach((cat,ci)=>{ const ii=cat.items.indexOf(item); if(ii>=0){ const card=document.querySelector(`.asset-item[data-ci="${ci}"][data-ii="${ii}"]`); if(card){ const el=card.querySelector('img'); if(el) el.src=thumbUrl; } } });
+          done++;
+        }));
+        setStatus('saving',`Generating thumbnails… ${done}/${thumbMisses.length}`);
+        await new Promise(r=>setTimeout(r,0)); // yield to browser
+      }
+      setStatus('synced','Ready');
+    }
   }
 
   // ── AUTO SCAN ──
@@ -1224,7 +1278,7 @@
   // ── RESET ──
   async function clearAll(){
     if(!confirm('Reset everything? This clears your GitHub config, folder links, and filters. Your data file on GitHub is untouched.')) return;
-    await clearH();
+    await clearH(); await clearThumbs();
     Object.values(CONFIG_KEYS).forEach(k=>localStorage.removeItem(k));
     assets=[]; statuses={}; tags={}; activeFilter=new Set(); activeTagFilter=null; searchQuery=''; ghFileSha=null;
     activeImgHandle=activeWorkHandle=null;
@@ -1290,7 +1344,7 @@
     const vidEl = document.getElementById('ql-video');
     const toggleBtn = document.getElementById('ql-toggle-media');
 
-    imgEl.src = item.src;
+    imgEl.src = item.fullSrc || item.src;
     vidEl.src = videoSrc || '';
     vidEl.style.display = 'none';
     imgEl.style.display = '';
