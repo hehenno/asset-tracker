@@ -303,7 +303,6 @@
     "Bolt_Car_Icon_NO_OffX.png": "green",
     "Bolt_Car_Icon_NO_top.png": "green",
     "Bolt_Hero_Car_Canaday_Top.png": "green",
-    "Bolt_Hero_Car_Pride_Off_X.png": "red",
     "Bolt_Hero_Car_Pride_Top.png": "green",
     "Bolt_Hero_Car_Sauna_OffX.png": "red",
     "Bolt_Hero_Car_Sauna_Top (1).png": "green",
@@ -742,7 +741,8 @@
     "Azerbaijan Purple.png": "red",
     "Azerbaijan Red.png": "red",
     "Bolt_Hero_Car_Canaday_Off_X.png": "green",
-    "Bolt_Aurora_icon.png": "green"
+    "Bolt_Aurora_icon.png": "green",
+    "Bolt_Hero_Car_Pride_Off_X.png": "green"
   },
   "tags": {
     "Row 123 Groceries (basket).png": [
