@@ -17,13 +17,31 @@
       --blue: #a78bfa;  --blue-dim: rgba(167,139,250,0.15);
       --cell: 130px; --radius: 6px;
     }
+    body.theme-light {
+      --bg: #f5f5f5; --surface: #ffffff; --surface2: #ebebeb;
+      --border: #d4d4d4; --text: #111111; --muted: #888888;
+      --accent: #1a7a46; --accent-dim: rgba(26,122,70,0.1);
+      --green: #16a34a; --green-dim: rgba(22,163,74,0.12);
+      --red: #dc2626;   --red-dim: rgba(220,38,38,0.12);
+      --yellow: #d97706;--yellow-dim: rgba(217,119,6,0.12);
+      --blue: #7c3aed;  --blue-dim: rgba(124,58,237,0.12);
+    }
+    body.theme-bolt {
+      --bg: #1a5c3c; --surface: #1f6d47; --surface2: #257d52;
+      --border: #2a8f5e; --text: #f0fff8; --muted: #7ec9a3;
+      --accent: #b5ff5a; --accent-dim: rgba(181,255,90,0.15);
+      --green: #4ade80; --green-dim: rgba(74,222,128,0.2);
+      --red: #ff6b6b;   --red-dim: rgba(255,107,107,0.2);
+      --yellow: #fbbf24;--yellow-dim: rgba(251,191,36,0.2);
+      --blue: #c4b5fd;  --blue-dim: rgba(196,181,253,0.2);
+    }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body { font-family: 'DM Mono', monospace; background: var(--bg); color: var(--text); min-height: 100vh; overflow-x: hidden; }
 
     /* TOPBAR */
     #topbar {
       position: sticky; top: 0; z-index: 100;
-      background: rgba(15,15,15,0.92); backdrop-filter: blur(12px);
+      background: var(--surface); backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border);
       padding: 0 24px; display: flex; align-items: center; gap: 12px; height: 56px;
     }
@@ -89,6 +107,10 @@
     .cat-nav-item .cn-c { margin-left: auto; font-size: 0.6rem; }
 
     .size-btns { display: flex; gap: 6px; }
+    .theme-btns { display: flex; gap: 6px; }
+    .theme-btn { flex: 1; padding: 6px 0; background: var(--surface2); border: 1px solid var(--border); border-radius: var(--radius); font-size: 1rem; cursor: pointer; transition: all 0.15s; }
+    .theme-btn:hover { border-color: var(--accent); }
+    .theme-btn.active { background: var(--accent-dim); border-color: var(--accent); }
     .size-btn { flex: 1; padding: 5px 0; background: var(--surface2); border: 1px solid var(--border); border-radius: var(--radius); color: var(--muted); font-family: 'DM Mono', monospace; font-size: 0.7rem; cursor: pointer; transition: all 0.15s; }
     .size-btn:hover { border-color: var(--accent); color: var(--accent); }
     .size-btn.active { background: var(--accent-dim); border-color: var(--accent); color: var(--accent); font-weight: 600; }
@@ -331,6 +353,14 @@
 
 <div id="layout">
   <div id="sidebar">
+    <div class="ss" id="theme-section">
+      <div class="sl">Theme</div>
+      <div class="theme-btns">
+        <button class="theme-btn active" id="th-dark"  onclick="setTheme('dark')"  title="Dark">🌙</button>
+        <button class="theme-btn"        id="th-light" onclick="setTheme('light')" title="Light">☀️</button>
+        <button class="theme-btn"        id="th-bolt"  onclick="setTheme('bolt')"  title="Bolt Green">🌿</button>
+      </div>
+    </div>
     <div class="ss">
       <div class="sl">Status</div>
       <button class="filter-btn active" id="f-all"    onclick="setFilter(null)"><span class="fb-dot" style="background:var(--muted)"></span>All<span class="fb-count" id="fc-all">0</span></button>
@@ -500,6 +530,16 @@
   const savedSize = localStorage.getItem('atZoom') || 'm';
   const validSize = SIZES[savedSize] ? savedSize : 'm';
   setSize(validSize);
+
+  // ── THEME ──
+  function setTheme(t){
+    document.body.classList.remove('theme-light','theme-bolt');
+    if(t==='light') document.body.classList.add('theme-light');
+    if(t==='bolt')  document.body.classList.add('theme-bolt');
+    ['dark','light','bolt'].forEach(k=>document.getElementById('th-'+k).classList.toggle('active',k===t));
+    localStorage.setItem('atTheme',t);
+  }
+  setTheme(localStorage.getItem('atTheme')||'dark');
 
   // ── TINT ──
   const tintToggle = document.getElementById('tint-toggle');
