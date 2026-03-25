@@ -324,7 +324,6 @@
     "French Taxi_OffX.png": "yellow",
     "French Taxi_Top.png": "green",
     "French_Taxi_Side.png": "red",
-    "Haloween_no Basket_3.png": "yellow",
     "Light Blue.png": "red",
     "Little Bolt Green .png": "red",
     "Little Bolt White.png": "red",
@@ -742,7 +741,8 @@
     "Bolt_Ramadan_Off_X.png": "green",
     "Bronze.png": "red",
     "Christmas_Off X.png": "red",
-    "Lime Off X.png": "red"
+    "Lime Off X.png": "red",
+    "Haloween_no Basket_3.png": "red"
   },
   "tags": {
     "Row 123 Groceries (basket).png": [
