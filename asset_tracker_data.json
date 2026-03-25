@@ -273,9 +273,9 @@
     "0_Romania_XS_Top.png": "green",
     "0_Row 7 Premium Car Iso (Silver_Detail).png": "green",
     "0_Row 7 Premium Car Side (Silver_Detail).png": "green",
-    "0_Row 24 XXL Iso (New Colour).png": "red",
-    "0_Row 24 XXL Off X(New Colour).png": "red",
-    "0_Row 24 XXL Side (New Colour).png": "red",
+    "0_Row 24 XXL Iso (New Colour).png": "yellow",
+    "0_Row 24 XXL Off X(New Colour).png": "yellow",
+    "0_Row 24 XXL Side (New Colour).png": "yellow",
     "0_Row 372 Mini Bus Off X.png": "green",
     "0_Row 374 Premium + Off X.png": "green",
     "0_Row 375 VIP Off X 1.png": "green",
@@ -284,7 +284,7 @@
     "0_Row 376 VIP + 2.png": "green",
     "0_Row 377 VIP XL 1.png": "green",
     "0_Row 377 VIP XL 2.png": "green",
-    "0_Row 382 Wheelchair Support_Yellow Taxi XL.png": "red",
+    "0_Row 382 Wheelchair Support_Yellow Taxi XL.png": "yellow",
     "0_Row 382 Wheelchair Support.png": "red",
     "0_Taxi Lexus_Iso.png": "red",
     "0_Taxi Lexus_Off X.png": "red",
@@ -742,7 +742,7 @@
     "0_Easter_Eggs in Basket.png": "green",
     "Row 127_ Convenience products.png": "green",
     "Row 121 Groceries with bag.png": "green",
-    "0_Pin Dark Pink.png": "red"
+    "0_Pin Dark Pink.png": "yellow"
   },
   "tags": {
     "Row 123 Groceries (basket).png": [
