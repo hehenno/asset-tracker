@@ -354,7 +354,6 @@
     "Premium MotorBike_Top_Vietnam.png": "green",
     "Premium MotorBike_Top.png": "green",
     "Priority Category.png": "red",
-    "Ramadan.png": "red",
     "Row 1 Bolt Green Back Hero Car Iso.png": "green",
     "Row 1 Bolt Green Back Hero Car Off X.png": "green",
     "Row 1 Bolt Green Back Hero Car Side.png": "green",
@@ -742,7 +741,8 @@
     "Bronze.png": "red",
     "Christmas_Off X.png": "red",
     "Lime Off X.png": "red",
-    "Haloween_no Basket_3.png": "red"
+    "Haloween_no Basket_3.png": "red",
+    "Ramadan.png": "green"
   },
   "tags": {
     "Row 123 Groceries (basket).png": [
