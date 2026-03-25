@@ -557,7 +557,6 @@
     "WineRed.png": "red",
     "Women_s Day.png": "red",
     "XL_Van_BikeStorage.png": "red",
-    "XL_Van_Childseat.png": "yellow",
     "XL_Van_Pets.png": "red",
     "Yellow.png": "green",
     "Malaysia (Female Driver).png": "red",
@@ -742,7 +741,8 @@
     "Christmas_Off X.png": "red",
     "Lime Off X.png": "red",
     "Haloween_no Basket_3.png": "red",
-    "Ramadan.png": "green"
+    "Ramadan.png": "green",
+    "XL_Van_Childseat.png": "red"
   },
   "tags": {
     "Row 123 Groceries (basket).png": [
