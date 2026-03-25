@@ -670,7 +670,7 @@
           activeWorkHandle = workH || null;
           if(videoH){ const vp = await videoH.queryPermission({mode:'read'}); if(vp==='granted'){ activeVideoHandle=videoH; await buildVideoBlobMap(); } }
           await loadImages();
-          document.getElementById('btn-scan').disabled = !workH;
+          document.getElementById('btn-scan').disabled = false;
           return;
         }
         showImgBanner(imgH.name);
@@ -801,7 +801,7 @@
       document.getElementById('setup-screen').style.display='none';
       document.getElementById('img-banner').style.display='none';
       updateImgBtn(imgH);
-      document.getElementById('btn-scan').disabled = !workH;
+      document.getElementById('btn-scan').disabled = false;
       await loadImages();
     } catch(e){ toast('Could not load images'); }
   }
@@ -1028,10 +1028,11 @@
     await new Promise(r=>setTimeout(r,0));
     let changed=0;
     assets.forEach(cat=>cat.items.forEach(item=>{
-      if(item.status==='yellow'||item.status==='blue'||item.status==='green') return;
+      if(item.status==='blue'||item.status==='green') return; // never touch green or animated
       const base=item.name.replace(/\.[^/.]+$/,'').toLowerCase();
       const found=names.some(n=>fuzzyMatch(base,n));
-      const next=found?'green':'red';
+      // yellow/red/null: if found → green; if not found → red (don't downgrade yellow to red though)
+      const next = found ? 'green' : (item.status==='yellow' ? 'yellow' : 'red');
       if(item.status!==next){item.status=next;statuses[item.name]=next;changed++;}
     }));
     if(changed){render();ghSave();setStatus('synced','Ready');toast(`✓ Scan done — ${changed} updated`);}
