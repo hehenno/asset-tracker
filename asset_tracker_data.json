@@ -317,7 +317,6 @@
     "Chauffeur XXL_2.png": "green",
     "Chauffeur XXL_Top.png": "green",
     "Christmas_Off X_2.png": "yellow",
-    "Christmas_Off X.png": "red",
     "Cyprus Intercity Taxi Standard.png": "red",
     "Cyprus Intercity Taxi XL.png": "red",
     "Election day (1).png": "red",
@@ -742,7 +741,8 @@
     "Bolt_Hero_Car_Pride_Off_X.png": "green",
     "Bolt_Hero_Car_Sauna_OffX.png": "green",
     "Bolt_Ramadan_Off_X.png": "green",
-    "Bronze.png": "red"
+    "Bronze.png": "red",
+    "Christmas_Off X.png": "green"
   },
   "tags": {
     "Row 123 Groceries (basket).png": [
