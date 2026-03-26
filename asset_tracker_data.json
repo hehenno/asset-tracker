@@ -88,7 +88,7 @@
     "Row 99 Payment Failed - Wallet.png": "green",
     "Row 100 Add Money.png": "green",
     "Row 101_ Plane arrived at an airport.png": "blue",
-    "Row 106 Default Illustration for promo_Gift only 2.png": "green",
+    "Row 106 Default Illustration for promo_Gift only 2.png": "blue",
     "Row 106 Default Illustration for promo_Gift only 3.png": "green",
     "Row 106 Default Illustration for promo_Gift only.png": "green",
     "Row 107 Illustration for Safety.png": "red",
@@ -3917,6 +3917,9 @@
     ],
     "Row 119 Fast Delivery.png": [
       "Fast delivery_3.mp4"
+    ],
+    "Row 106 Default Illustration for promo_Gift only 2.png": [
+      "GIFT_1.mp4"
     ]
   }
 }
