@@ -270,7 +270,7 @@
     "0_Romania_XS_OffX.png": "yellow",
     "0_Romania_XS_Top.png": "green",
     "0_Row 7 Premium Car Iso (Silver_Detail).png": "green",
-    "0_Row 7 Premium Car Side (Silver_Detail).png": "green",
+    "0_Row 7 Premium Car Side (Silver_Detail).png": "blue",
     "0_Row 24 XXL Iso (New Colour).png": "yellow",
     "0_Row 24 XXL Off X(New Colour).png": "yellow",
     "0_Row 24 XXL Side (New Colour).png": "yellow",
@@ -3880,6 +3880,9 @@
     ],
     "Row 116_ Food Order (Dine-in_ No Delivery) .png": [
       "Burger_2.mp4"
+    ],
+    "0_Row 7 Premium Car Side (Silver_Detail).png": [
+      "Car Premium Driving.mp4"
     ]
   }
 }
