@@ -6,7 +6,6 @@
     "0_Row 395 Loyalty Campaign_Front.png": "red",
     "0_Row 395 Loyalty Campaign_L.png": "red",
     "0_Row 395 Loyalty Campaign_R.png": "red",
-    "Arrived 1.png": "red",
     "Arrived 2.png": "green",
     "Asian.png": "green",
     "Breakfast.png": "green",
@@ -742,7 +741,8 @@
     "XL_Van_Childseat.png": "red",
     "Row 135 Top Rated.png": "blue",
     "Row 136_ Delivery Discounts.png": "blue",
-    "Row 7 Premium Car Off X.png": "blue"
+    "Row 7 Premium Car Off X.png": "blue",
+    "Arrived 1.png": "green"
   },
   "tags": {
     "Row 123 Groceries (basket).png": [
