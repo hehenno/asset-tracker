@@ -290,7 +290,7 @@
     "0_Taxi Red Roof_Cream_Iso.png": "yellow",
     "0_Taxi Red Roof_Cream_Off X.png": "yellow",
     "0_Taxi Red Roof_Cream_Side.png": "yellow",
-    "0_XL + Off X.png": "yellow",
+    "0_XL + Off X.png": "blue",
     "Beige.png": "red",
     "Blue.png": "red",
     "Bolt Comfort Car_RO_OffX.png": "green",
@@ -742,7 +742,7 @@
     "XL_Van_Childseat.png": "red",
     "Row 135 Top Rated.png": "blue",
     "Row 136_ Delivery Discounts.png": "blue",
-    "Row 7 Premium Car Off X.png": "green"
+    "Row 7 Premium Car Off X.png": "blue"
   },
   "tags": {
     "Row 123 Groceries (basket).png": [
@@ -3870,6 +3870,12 @@
       "Woman With Binoculars - Row 59 All Drivers Busy.mp4"
     ],
     "Row 1 Hero Green Circle Car Off X.png": [
+      "Bolt Car Switching.mp4"
+    ],
+    "Row 7 Premium Car Off X.png": [
+      "Bolt Car Switching.mp4"
+    ],
+    "0_XL + Off X.png": [
       "Bolt Car Switching.mp4"
     ]
   }
