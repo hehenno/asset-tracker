@@ -646,7 +646,7 @@
     "Row 164_ Close up driver Icon_1.png": "red",
     "Row 164_ Close up driver Icon_2.png": "red",
     "Row 164_ Close up w_o helmet_2.png": "red",
-    "Row 164_ Close up w_o helmet.png": "red",
+    "Row 164_ Close up w_o helmet.png": "blue",
     "Row 164_ Man on bike full_1.png": "green",
     "Row 164_ Man on bike full_2.png": "green",
     "Row 165 Male Courier and car_1.png": "blue",
@@ -3941,6 +3941,9 @@
     ],
     "Row 77 Authentication_2.png": [
       "lock.mp4"
+    ],
+    "Row 164_ Close up w_o helmet.png": [
+      "Male Bike Courier - Row 164_ Close up.mp4"
     ]
   }
 }
