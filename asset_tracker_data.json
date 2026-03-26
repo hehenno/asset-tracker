@@ -160,7 +160,7 @@
     "Row 330 Bolt Business voucher_coupon.png": "red",
     "Row 331 Bolt Business card_money 1.png": "red",
     "Row 333 Error invoice.png": "red",
-    "Row 334 Success app (open app) 1.png": "red",
+    "Row 334 Success app (open app) 1.png": "blue",
     "Row 334 Success app (open app) 2.png": "red",
     "Row 335 Download the bolt app 1.png": "red",
     "Row 335 Download the bolt app 2.png": "red",
@@ -4031,6 +4031,9 @@
     ],
     "Row 70_ Verification_3.png": [
       "Shield - Row 71_ Verification Shield_Check.mp4"
+    ],
+    "Row 334 Success app (open app) 1.png": [
+      "Smartphone In Hand - Row 363.mp4"
     ]
   }
 }
