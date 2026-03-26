@@ -742,7 +742,7 @@
     "Row 135 Top Rated.png": "blue",
     "Row 136_ Delivery Discounts.png": "blue",
     "Row 7 Premium Car Off X.png": "blue",
-    "Arrived 1.png": "green"
+    "Arrived 1.png": "blue"
   },
   "tags": {
     "Row 123 Groceries (basket).png": [
@@ -3895,6 +3895,9 @@
     ],
     "Row 165 Male Courier and car_1.png": [
       "Courier_1.mp4"
+    ],
+    "Arrived 1.png": [
+      "Courier_waving_loop.mp4"
     ]
   }
 }
