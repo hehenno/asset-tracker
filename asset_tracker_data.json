@@ -65,7 +65,7 @@
     "Row 73_ Email Done.png": "red",
     "Row 74_ Email Error.png": "red",
     "Row 76_ Authentication_1.png": "green",
-    "Row 77 Authentication_2.png": "green",
+    "Row 77 Authentication_2.png": "blue",
     "Row 78_ Authentication_3.png": "green",
     "Row 84 Work Rides.png": "green",
     "Row 85_ Work Profile.png": "green",
@@ -3938,6 +3938,9 @@
     ],
     "Row 364 Hands up in celebration with confetti 1.png": [
       "Hands_horizontal.mp4"
+    ],
+    "Row 77 Authentication_2.png": [
+      "lock.mp4"
     ]
   }
 }
