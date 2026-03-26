@@ -706,7 +706,7 @@
     "0_Row 395 Emoji&Discount.png": "red",
     "0_Row 395 Hero Emoji.png": "red",
     "Preparation_Night.png": "blue",
-    "Row 123 Groceries (basket).png": "green",
+    "Row 123 Groceries (basket).png": "blue",
     "Sushi 2.png": "green",
     "Burger.png": "blue",
     "Coin Plus 1.png": "green",
@@ -3923,6 +3923,9 @@
     ],
     "Row 362 The planet.png": [
       "GLOBE.mp4"
+    ],
+    "Row 123 Groceries (basket).png": [
+      "GROCERIES - BASKET.mp4"
     ]
   }
 }
