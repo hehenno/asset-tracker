@@ -565,7 +565,7 @@
     "Row 55_ No location, Cant identify rider_s location_ 2.png": "red",
     "Row 59 All Drivers Busy_1.png": "blue",
     "Row 59 All Drivers Busy_2.png": "blue",
-    "Row 67 No ongoing rides - empty state_1.png": "green",
+    "Row 67 No ongoing rides - empty state_1.png": "blue",
     "Row 67 No ongoing rides - empty state_2.png": "green",
     "Row 79_ Warning_1.png": "red",
     "Row 79_ Warning_2.png": "red",
@@ -4048,10 +4048,14 @@
       "Wallet - Row 97 Wallet XL.mp4"
     ],
     "Row 159 Woman + Car 3 (no windows).png": [
-      "Woman and Man Driving Windows - Row 159.mp4"
+      "Woman and Man Driving Windows - Row 159.mp4",
+      "Woman Riding Window Row 159.mp4"
     ],
     "Row 166 Woman holding hands up 2 with confetti.png": [
       "Woman Holding Hands Up Confetti - Row 166.mp4"
+    ],
+    "Row 67 No ongoing rides - empty state_1.png": [
+      "Woman Shrugging - Row 67 No ongoing rides Woman_Shrugging.mp4"
     ]
   }
 }
