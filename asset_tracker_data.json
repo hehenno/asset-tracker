@@ -610,7 +610,7 @@
     "Row 157 Woman + Bicycle (with helmet) 2.png": "red",
     "Row 158 Man + Bicycle (with helmet + variation with confetti) 1.png": "red",
     "Row 158 Man + Bicycle (with helmet + variation with confetti) 2.png": "red",
-    "Row 158 Man + Bicycle (with helmet) 1.png": "red",
+    "Row 158 Man + Bicycle (with helmet) 1.png": "blue",
     "Row 158 Man + Bicycle (with helmet) 2.png": "red",
     "Row 159 Woman + Car 1 (no windows).png": "blue",
     "Row 159 Woman + Car 2 (no windows).png": "green",
@@ -3964,6 +3964,9 @@
     ],
     "Row 169 Man eating 2.png": [
       "Man_eating_pizza_dark_ver_1_dark_skin.mp4"
+    ],
+    "Row 158 Man + Bicycle (with helmet) 1.png": [
+      "Man_on_bike.mp4"
     ]
   }
 }
