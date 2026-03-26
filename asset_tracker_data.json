@@ -7,7 +7,7 @@
     "0_Row 395 Loyalty Campaign_L.png": "red",
     "0_Row 395 Loyalty Campaign_R.png": "red",
     "Arrived 2.png": "green",
-    "Asian.png": "green",
+    "Asian.png": "blue",
     "Breakfast.png": "green",
     "Chinese Flag (option).png": "red",
     "Confirmation Mobile Payments  (Version 2).png": "red",
@@ -3996,6 +3996,9 @@
     ],
     "Row 56 Set pick-up Location_1.png": [
       "Map.mp4"
+    ],
+    "Asian.png": [
+      "Noodles.mp4"
     ]
   }
 }
