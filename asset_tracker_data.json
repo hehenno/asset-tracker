@@ -241,7 +241,7 @@
     "Row 385 Allow location services access.png": "red",
     "Row 386 Ride Timeout.png": "green",
     "Row 388 Ride ended automatically.png": "red",
-    "Row 389 Icon 1.png": "red",
+    "Row 389 Icon 1.png": "blue",
     "Row 389 Icon 2.png": "red",
     "Row 389 Icon 3.png": "red",
     "Row 389 Icon 4.png": "red",
@@ -3885,6 +3885,9 @@
       "Car Premium Driving.mp4"
     ],
     "Row 94_ Driver accepted change request Icon.png": [
+      "Check mark.mp4"
+    ],
+    "Row 389 Icon 1.png": [
       "Check mark.mp4"
     ]
   }
