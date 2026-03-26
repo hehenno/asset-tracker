@@ -612,7 +612,7 @@
     "Row 158 Man + Bicycle (with helmet + variation with confetti) 2.png": "red",
     "Row 158 Man + Bicycle (with helmet) 1.png": "red",
     "Row 158 Man + Bicycle (with helmet) 2.png": "red",
-    "Row 159 Woman + Car 1 (no windows).png": "green",
+    "Row 159 Woman + Car 1 (no windows).png": "blue",
     "Row 159 Woman + Car 2 (no windows).png": "green",
     "Row 159 Woman + Car 3 (no windows).png": "green",
     "Row 160 Man + Car + window 1 (no window).png": "red",
@@ -3948,6 +3948,9 @@
     ],
     "Row 103 Are you ordering a ride for someone else_1.png": [
       "Man and Woman standing - Row 103 Are you ordering a ride for someone else.mp4"
+    ],
+    "Row 159 Woman + Car 1 (no windows).png": [
+      "Man Driving Window - Row 159.mp4"
     ]
   }
 }
