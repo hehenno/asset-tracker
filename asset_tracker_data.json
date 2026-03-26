@@ -378,7 +378,6 @@
     "Row 6 Comfort Car Top.png": "green",
     "Row 6 Comfort Car.png": "green",
     "Row 7 Premium Car Iso.png": "green",
-    "Row 7 Premium Car Off X.png": "red",
     "Row 7 Premium Car Side.png": "green",
     "Row 7 Premium Car Top.png": "green",
     "Row 7 Premium Off X (Silver Detail).png": "yellow",
@@ -742,7 +741,8 @@
     "Ramadan.png": "green",
     "XL_Van_Childseat.png": "red",
     "Row 135 Top Rated.png": "blue",
-    "Row 136_ Delivery Discounts.png": "blue"
+    "Row 136_ Delivery Discounts.png": "blue",
+    "Row 7 Premium Car Off X.png": "green"
   },
   "tags": {
     "Row 123 Groceries (basket).png": [
