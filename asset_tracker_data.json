@@ -624,7 +624,7 @@
     "Row 161 Man unlocking Bolt Drive car_key 2.png": "green",
     "Row 161 Man unlocking Bolt Drive car_Phone + confetti 1.png": "green",
     "Row 161 Man unlocking Bolt Drive car_Phone + confetti 2.png": "green",
-    "Row 161 Man unlocking Bolt Drive car_Phone 1.png": "green",
+    "Row 161 Man unlocking Bolt Drive car_Phone 1.png": "blue",
     "Row 161 Man unlocking Bolt Drive car_Phone 2.png": "green",
     "Row 162 Woman unlocking Bolt Drive car with Key (+ variation with confetti) 1.png": "green",
     "Row 162 Woman unlocking Bolt Drive car with Key (+ variation with confetti) 2.png": "green",
@@ -3968,6 +3968,9 @@
     ],
     "Row 158 Man + Bicycle (with helmet) 1.png": [
       "Man_on_bike.mp4"
+    ],
+    "Row 161 Man unlocking Bolt Drive car_Phone 1.png": [
+      "Man_with_car.mp4"
     ]
   }
 }
