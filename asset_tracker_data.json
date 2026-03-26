@@ -12,7 +12,7 @@
     "Chinese Flag (option).png": "red",
     "Confirmation Mobile Payments  (Version 2).png": "blue",
     "Confirmation Mobile Payments (Version 1).png": "red",
-    "Confirmation Mobile Payments 2.png": "red",
+    "Confirmation Mobile Payments 2.png": "blue",
     "Credit card.png": "green",
     "Decline Mobile Payments  (Version 1).png": "blue",
     "Decline Mobile Payments (Version 2).png": "red",
@@ -4007,6 +4007,9 @@
       "PHONE TAPPING.mp4"
     ],
     "Confirmation Mobile Payments  (Version 2).png": [
+      "Phone_coins.mp4"
+    ],
+    "Confirmation Mobile Payments 2.png": [
       "Phone_coins.mp4"
     ]
   }
