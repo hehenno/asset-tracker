@@ -58,7 +58,7 @@
     "Row 66_ Chat with Support - empty state.png": "red",
     "Row 68_ Verification_1.png": "green",
     "Row 69_ Verification_2.png": "green",
-    "Row 70_ Verification_3.png": "green",
+    "Row 70_ Verification_3.png": "blue",
     "Row 71 Verification 4 orange.png": "green",
     "Row 71_ Verification_4.png": "blue",
     "Row 72_ Email-Locked.png": "red",
@@ -4028,6 +4028,9 @@
     ],
     "Row 71_ Verification_4.png": [
       "Shield - Row 71_ Verification Safety_alert.mp4"
+    ],
+    "Row 70_ Verification_3.png": [
+      "Shield - Row 71_ Verification Shield_Check.mp4"
     ]
   }
 }
