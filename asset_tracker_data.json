@@ -93,7 +93,7 @@
     "Row 106 Default Illustration for promo_Gift only 3.png": "green",
     "Row 106 Default Illustration for promo_Gift only.png": "green",
     "Row 107 Illustration for Safety.png": "red",
-    "Row 109_ Delivery Bag.png": "green",
+    "Row 109_ Delivery Bag.png": "blue",
     "Row 110_ Delivery Discount.png": "blue",
     "Row 111_ Paperbag with branding (pickup order).png": "red",
     "Row 112_ Food Order.png": "green",
@@ -3847,6 +3847,9 @@
       "Bag_3.mp4",
       "Bag_4.mp4",
       "Bag_with_offer_v2.mp4"
+    ],
+    "Row 109_ Delivery Bag.png": [
+      "Bag_1.mp4"
     ]
   }
 }
