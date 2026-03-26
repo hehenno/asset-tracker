@@ -652,7 +652,7 @@
     "Row 165 Male Courier and car_2.png": "green",
     "Row 166 Woman holding hands up 1 with confetti.png": "red",
     "Row 166 Woman holding hands up 1.png": "red",
-    "Row 166 Woman holding hands up 2 with confetti.png": "red",
+    "Row 166 Woman holding hands up 2 with confetti.png": "blue",
     "Row 166 Woman holding hands up 2.png": "red",
     "Row 166 Woman standing 1.png": "green",
     "Row 166 Woman standing 2.png": "green",
@@ -4049,6 +4049,9 @@
     ],
     "Row 159 Woman + Car 3 (no windows).png": [
       "Woman and Man Driving Windows - Row 159.mp4"
+    ],
+    "Row 166 Woman holding hands up 2 with confetti.png": [
+      "Woman Holding Hands Up Confetti - Row 166.mp4"
     ]
   }
 }
