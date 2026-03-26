@@ -398,7 +398,7 @@
     "Row 10 Basic XL Car.png": "green",
     "Row 11 Scooter Iso.png": "green",
     "Row 11 Scooter Off X.png": "green",
-    "Row 11 Scooter Side.png": "green",
+    "Row 11 Scooter Side.png": "blue",
     "Row 12 Electric Bike Iso.png": "green",
     "Row 12 Electric Bike Off X.png": "green",
     "Row 12 Electric Bike Side.png": "green",
@@ -4020,6 +4020,9 @@
     ],
     "Row 326 AI chatbot agent.png": [
       "Robot - Row 326.mp4"
+    ],
+    "Row 11 Scooter Side.png": [
+      "Scooter_empty.mp4"
     ]
   }
 }
