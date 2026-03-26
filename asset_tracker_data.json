@@ -655,7 +655,7 @@
     "Row 166 Woman holding hands up 2 with confetti.png": "blue",
     "Row 166 Woman holding hands up 2.png": "red",
     "Row 166 Woman standing 1.png": "green",
-    "Row 166 Woman standing 2.png": "green",
+    "Row 166 Woman standing 2.png": "blue",
     "Row 166 Woman walking 1.png": "green",
     "Row 166 Woman walking 2.png": "green",
     "Row 167 Man holding hand(s) up in celebration_with confetti 1.png": "green",
@@ -4056,6 +4056,9 @@
     ],
     "Row 67 No ongoing rides - empty state_1.png": [
       "Woman Shrugging - Row 67 No ongoing rides Woman_Shrugging.mp4"
+    ],
+    "Row 166 Woman standing 2.png": [
+      "Woman Standing 1 - Row 166.mp4"
     ]
   }
 }
