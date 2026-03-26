@@ -603,7 +603,7 @@
     "Row 156 Man on Scooter_with helmet_ confetti_1.png": "green",
     "Row 156 Man on Scooter_with helmet_ confetti_2.png": "green",
     "Row 156 Man on Scooter_with helmet_1.png": "green",
-    "Row 156 Man on Scooter_with helmet_2.png": "green",
+    "Row 156 Man on Scooter_with helmet_2.png": "blue",
     "Row 157 Woman + Bicycle  (with helmet, + variation with confetti) 1.png": "red",
     "Row 157 Woman + Bicycle  (with helmet, + variation with confetti) 2.png": "red",
     "Row 157 Woman + Bicycle (with helmet) 1.png": "red",
@@ -3971,6 +3971,9 @@
     ],
     "Row 161 Man unlocking Bolt Drive car_Phone 1.png": [
       "Man_with_car.mp4"
+    ],
+    "Row 156 Man on Scooter_with helmet_2.png": [
+      "Man_with_scooter_waving.mp4"
     ]
   }
 }
