@@ -100,7 +100,7 @@
     "Row 113_ Discounts.png": "green",
     "Row 114_ Order again.png": "red",
     "Row 115_ Grocery order.png": "red",
-    "Row 116_ Food Order (Dine-in_ No Delivery) .png": "green",
+    "Row 116_ Food Order (Dine-in_ No Delivery) .png": "blue",
     "Row 117_ Service (Dine-In)_1.png": "green",
     "Row 117_ Service (Dine-In)_2.png": "green",
     "Row 118_ Night (24_7 or late night food options).png": "green",
@@ -3877,6 +3877,9 @@
     ],
     "0_XL + Off X.png": [
       "Bolt Car Switching.mp4"
+    ],
+    "Row 116_ Food Order (Dine-in_ No Delivery) .png": [
+      "Burger_2.mp4"
     ]
   }
 }
