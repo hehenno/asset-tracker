@@ -83,7 +83,6 @@
     "Row 92_ Cancel Ride Icon.png": "red",
     "Row 93_ Driver busy Icon.png": "red",
     "Row 94_ Driver accepted change request Icon.png": "blue",
-    "Row 96_ Pass.png": "blue",
     "Row 97 Wallet XL.png": "blue",
     "Row 99 Payment Failed - Wallet.png": "green",
     "Row 100 Add Money.png": "green",
@@ -742,7 +741,8 @@
     "Row 7 Premium Car Off X.png": "blue",
     "Arrived 1.png": "blue",
     "Row 323 Family_1.png": "red",
-    "Row 323 Family_2.png": "red"
+    "Row 323 Family_2.png": "red",
+    "Row 96_ Pass.png": "blue"
   },
   "tags": {
     "Row 123 Groceries (basket).png": [
