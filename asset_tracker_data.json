@@ -583,7 +583,7 @@
     "Row 92-94 & 171 Driver 1 Solo.png": "green",
     "Row 92-94 & 171 Driver 2 Solo.png": "green",
     "Row 95 Passenger Rating_1.png": "green",
-    "Row 95 Passenger Rating_2.png": "green",
+    "Row 95 Passenger Rating_2.png": "blue",
     "Row 95 Passenger Rating_3.png": "green",
     "Row 102 Account Deleted_1.png": "blue",
     "Row 102 Account Deleted_2.png": "blue",
@@ -3905,6 +3905,9 @@
     "Row 325 Customer support agent_1.png": [
       "Customer Support.mp4",
       "Customer_support_looped.mp4"
+    ],
+    "Row 95 Passenger Rating_2.png": [
+      "Driver Rating.mp4"
     ]
   }
 }
