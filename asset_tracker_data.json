@@ -202,7 +202,7 @@
     "Row 350 Work Profile warning_full.png": "green",
     "Row 351 Extra Icon Check.png": "green",
     "Row 351 Extra Icon Download.png": "green",
-    "Row 351 Invoice and T&C clear.png": "green",
+    "Row 351 Invoice and T&C clear.png": "blue",
     "Row 351 Invoice and T&Cs download_full.png": "green",
     "Row 351 Invoice and T&Cs success base.png": "green",
     "Row 351 Invoice and T&Cs success_full.png": "green",
@@ -4037,6 +4037,9 @@
     ],
     "Row 392 Speedometer.png": [
       "Speedometer - Row 392.mp4"
+    ],
+    "Row 351 Invoice and T&C clear.png": [
+      "T&C.mp4"
     ]
   }
 }
