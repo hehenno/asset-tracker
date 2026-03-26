@@ -141,7 +141,7 @@
     "Row 314-319 Car Branding_Front_Solo.png": "red",
     "Row 314-319 Car Branding_Left_Solo.png": "red",
     "Row 314-319 Car Branding_Right_Solo.png": "red",
-    "Row 314-319_ Car Branding_Green Icon_Solo.png": "red",
+    "Row 314-319_ Car Branding_Green Icon_Solo.png": "blue",
     "Row 314-319_ Car Branding_Red Icon_Solo.png": "red",
     "Row 314, 317_ Car Branding_Hand_1.png": "red",
     "Row 314, 317_ Car Branding_Hand_2.png": "red",
@@ -3888,6 +3888,9 @@
       "Check mark.mp4"
     ],
     "Row 389 Icon 1.png": [
+      "Check mark.mp4"
+    ],
+    "Row 314-319_ Car Branding_Green Icon_Solo.png": [
       "Check mark.mp4"
     ]
   }
