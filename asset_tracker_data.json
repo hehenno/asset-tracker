@@ -118,7 +118,6 @@
     "Row 132_ Sweets.png": "green",
     "Row 133_ Toys and Games.png": "red",
     "Row 134_ New merchants.png": "red",
-    "Row 135 Top Rated.png": "blue",
     "Row 136_ Delivery Discounts.png": "red",
     "Row 137_ Menu Discounts.png": "green",
     "Row 138 Special offer, gift.png": "red",
@@ -742,7 +741,8 @@
     "Lime Off X.png": "red",
     "Haloween_no Basket_3.png": "red",
     "Ramadan.png": "green",
-    "XL_Van_Childseat.png": "red"
+    "XL_Van_Childseat.png": "red",
+    "Row 135 Top Rated.png": "blue"
   },
   "tags": {
     "Row 123 Groceries (basket).png": [
