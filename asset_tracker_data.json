@@ -675,7 +675,6 @@
     "Row 170 Businessman with suitcase standing 2.png": "green",
     "Row 170 Businessman with suitcase walking 1.png": "green",
     "Row 170 Businessman with suitcase walking 2.png": "green",
-    "Row 323 Family_1.png": "blue",
     "Row 323 Family_2.png": "blue",
     "Row 323 Family_3.png": "blue",
     "Row 323 Family_4.png": "blue",
@@ -742,7 +741,8 @@
     "Row 135 Top Rated.png": "blue",
     "Row 136_ Delivery Discounts.png": "blue",
     "Row 7 Premium Car Off X.png": "blue",
-    "Arrived 1.png": "blue"
+    "Arrived 1.png": "blue",
+    "Row 323 Family_1.png": "green"
   },
   "tags": {
     "Row 123 Groceries (basket).png": [
