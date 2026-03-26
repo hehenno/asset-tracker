@@ -670,7 +670,7 @@
     "Row 168 Woman eating 2.png": "green",
     "Row 168 Woman eating.png": "blue",
     "Row 169 Man eating 1.png": "blue",
-    "Row 169 Man eating 2.png": "green",
+    "Row 169 Man eating 2.png": "blue",
     "Row 170 Businessman with suitcase standing 1.png": "green",
     "Row 170 Businessman with suitcase standing 2.png": "green",
     "Row 170 Businessman with suitcase walking 1.png": "green",
@@ -3960,6 +3960,9 @@
     ],
     "Row 169 Man eating 1.png": [
       "Man_eating_1.mp4"
+    ],
+    "Row 169 Man eating 2.png": [
+      "Man_eating_pizza_dark_ver_1_dark_skin.mp4"
     ]
   }
 }
