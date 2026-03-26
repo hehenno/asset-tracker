@@ -104,7 +104,7 @@
     "Row 117_ Service (Dine-In)_2.png": "green",
     "Row 118_ Night (24_7 or late night food options).png": "green",
     "Row 119 Fast Delivery with icon.png": "green",
-    "Row 119 Fast Delivery.png": "green",
+    "Row 119 Fast Delivery.png": "blue",
     "Row 120_ Breakfast.png": "green",
     "Row 122 Groceries (without bag, delivery).png": "green",
     "Row 124_ Alcohol.png": "red",
@@ -3914,6 +3914,9 @@
     ],
     "Row 323 Family_3.png": [
       "Family With Pets - Row 323.mp4"
+    ],
+    "Row 119 Fast Delivery.png": [
+      "Fast delivery_3.mp4"
     ]
   }
 }
