@@ -679,7 +679,7 @@
     "Row 323 Family_2.png": "blue",
     "Row 323 Family_3.png": "blue",
     "Row 323 Family_4.png": "blue",
-    "Row 325 Customer support agent_1.png": "green",
+    "Row 325 Customer support agent_1.png": "blue",
     "Row 325 Customer support agent_2.png": "green",
     "Row 340 People Full 1.png": "red",
     "Row 340 People Full 2.png": "red",
@@ -3898,6 +3898,9 @@
     ],
     "Arrived 1.png": [
       "Courier_waving_loop.mp4"
+    ],
+    "Row 325 Customer support agent_1.png": [
+      "Customer Support.mp4"
     ]
   }
 }
