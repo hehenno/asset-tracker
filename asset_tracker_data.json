@@ -357,7 +357,7 @@
     "Row 1 Bolt Green Back Hero Car Side.png": "green",
     "Row 1 Bolt Green Back Hero Car Top.png": "green",
     "Row 1 Hero Green Circle Car Iso.png": "green",
-    "Row 1 Hero Green Circle Car Off X.png": "green",
+    "Row 1 Hero Green Circle Car Off X.png": "blue",
     "Row 1 Hero Green Circle Car Top.png": "green",
     "Row 1 Hero Green Circle Carr Side.png": "green",
     "Row 5 Bolt Category - Green Back.png": "green",
@@ -3868,6 +3868,9 @@
     "Row 59 All Drivers Busy_2.png": [
       "Binoculars.mp4",
       "Woman With Binoculars - Row 59 All Drivers Busy.mp4"
+    ],
+    "Row 1 Hero Green Circle Car Off X.png": [
+      "Bolt Car Switching.mp4"
     ]
   }
 }
