@@ -228,7 +228,7 @@
     "Row 361 Traffic Light Green.png": "green",
     "Row 361 Traffic Light orange.png": "green",
     "Row 361 Traffic Light Red.png": "green",
-    "Row 362 The planet.png": "green",
+    "Row 362 The planet.png": "blue",
     "Row 363 Smartphone in hand 1.png": "green",
     "Row 363 Smartphone in hand 2.png": "green",
     "Row 364 Hands up in celebration with confetti 1.png": "green",
@@ -3920,6 +3920,9 @@
     ],
     "Row 106 Default Illustration for promo_Gift only 2.png": [
       "GIFT_1.mp4"
+    ],
+    "Row 362 The planet.png": [
+      "GLOBE.mp4"
     ]
   }
 }
