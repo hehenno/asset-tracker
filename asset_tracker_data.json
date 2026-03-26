@@ -43,7 +43,7 @@
     "Row 51_ Get assistance from driver_1.png": "green",
     "Row 51_ Get assistance from driver_2.png": "green",
     "Row 53_ Electric.png": "green",
-    "Row 56 Set pick-up Location_1.png": "green",
+    "Row 56 Set pick-up Location_1.png": "blue",
     "Row 56 Set pick-up Location_2.png": "green",
     "Row 57 Set Location denied_1.png": "green",
     "Row 57 Set Location denied_2.png": "green",
@@ -3993,6 +3993,9 @@
     ],
     "Row 156 Man on Scooter_with helmet_2.png": [
       "Man_with_scooter_waving.mp4"
+    ],
+    "Row 56 Set pick-up Location_1.png": [
+      "Map.mp4"
     ]
   }
 }
