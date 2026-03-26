@@ -96,7 +96,7 @@
     "Row 110_ Delivery Discount.png": "blue",
     "Row 111_ Paperbag with branding (pickup order).png": "red",
     "Row 112_ Food Order.png": "green",
-    "Row 113_ Discounts.png": "green",
+    "Row 113_ Discounts.png": "blue",
     "Row 114_ Order again.png": "red",
     "Row 115_ Grocery order.png": "red",
     "Row 116_ Food Order (Dine-in_ No Delivery) .png": "blue",
@@ -3999,6 +3999,9 @@
     ],
     "Asian.png": [
       "Noodles.mp4"
+    ],
+    "Row 113_ Discounts.png": [
+      "PAPER BAG + OFFER.mp4"
     ]
   }
 }
