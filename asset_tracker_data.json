@@ -282,7 +282,6 @@
     "0_Row 382 Wheelchair Support_Yellow Taxi XL.png": "yellow",
     "0_Row 382 Wheelchair Support.png": "yellow",
     "0_Taxi Lexus_Off X.png": "yellow",
-    "0_Taxi Red Roof_Cream_Iso.png": "yellow",
     "0_Taxi Red Roof_Cream_Off X.png": "yellow",
     "0_Taxi Red Roof_Cream_Side.png": "yellow",
     "0_XL + Off X.png": "blue",
@@ -742,7 +741,8 @@
     "Row 96_ Pass.png": "blue",
     "0_Bolt Hero Car (Flowers - Woman_s Day) Off X.png": "yellow",
     "0_Taxi Lexus_Iso.png": "red",
-    "0_Taxi Lexus_Side.png": "red"
+    "0_Taxi Lexus_Side.png": "red",
+    "0_Taxi Red Roof_Cream_Iso.png": "red"
   },
   "tags": {
     "Row 123 Groceries (basket).png": [
