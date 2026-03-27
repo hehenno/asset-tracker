@@ -310,7 +310,6 @@
     "Christmas_Off X_2.png": "yellow",
     "Cyprus Intercity Taxi Standard.png": "red",
     "Cyprus Intercity Taxi XL.png": "red",
-    "Election day (1).png": "yellow",
     "Election day.png": "red",
     "French Taxi_OffX.png": "yellow",
     "French Taxi_Top.png": "red",
@@ -742,7 +741,8 @@
     "0_Taxi Lexus_Iso.png": "red",
     "0_Taxi Lexus_Side.png": "red",
     "0_Taxi Red Roof_Cream_Iso.png": "red",
-    "0_Taxi Red Roof_Cream_Side.png": "red"
+    "0_Taxi Red Roof_Cream_Side.png": "red",
+    "Election day (1).png": "red"
   },
   "tags": {
     "Row 123 Groceries (basket).png": [
