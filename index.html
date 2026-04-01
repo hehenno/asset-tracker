@@ -52,14 +52,14 @@
     /* Main search (above gallery) */
     #main-search-wrap { position: sticky; top: 0; z-index: 50; padding: 4px 0 6px; background: var(--bg); display: none; }
     #main-search-wrap .ms-inner { position: relative; display: inline-block; min-width: 280px; }
-    #main-search-wrap .si { position: absolute; left: 0; top: 50%; transform: translateY(-50%); color: var(--muted); font-size: 1.2rem; pointer-events: none; }
-    #main-search-input { width: 100%; padding: 10px 28px 10px 28px; background: transparent; border: none; border-bottom: 2px solid var(--border); color: var(--text); font-family: 'Inter', sans-serif; font-size: 1.35rem; font-weight: 800; outline: none; transition: border-color 0.2s; letter-spacing: -0.03em; }
+    #main-search-wrap .si { position: absolute; left: 0; top: 50%; transform: translateY(-50%); color: var(--muted); font-size: 2rem; pointer-events: none; }
+    #main-search-input { width: 100%; padding: 6px 40px 6px 36px; background: transparent; border: none; border-bottom: 2px solid var(--border); color: var(--text); font-family: 'Inter', sans-serif; font-size: 3rem; font-weight: 800; outline: none; transition: border-color 0.2s; letter-spacing: -0.03em; }
     #main-search-input:focus { border-color: var(--accent); }
-    #main-search-input::placeholder { color: var(--muted); font-weight: 600; opacity: 0.5; }
-    #main-search-clear { position: absolute; right: 4px; top: 50%; transform: translateY(-50%); background: none; border: none; color: var(--muted); cursor: pointer; font-size: 1.3rem; line-height: 1; display: none; padding: 2px; }
+    #main-search-input::placeholder { color: var(--muted); font-weight: 600; opacity: 0.35; }
+    #main-search-clear { position: absolute; right: 4px; top: 50%; transform: translateY(-50%); background: none; border: none; color: var(--muted); cursor: pointer; font-size: 1.8rem; line-height: 1; display: none; padding: 2px; }
     #main-search-clear:hover { color: var(--text); }
     #main-search-input.has-value ~ #main-search-clear { display: block; }
-    #main-search-sizer { position: absolute; top: 0; left: 0; visibility: hidden; white-space: pre; font-family: 'Inter', sans-serif; font-size: 1.35rem; font-weight: 800; letter-spacing: -0.03em; padding: 0 28px 0 28px; pointer-events: none; }
+    #main-search-sizer { position: absolute; top: 0; left: 0; visibility: hidden; white-space: pre; font-family: 'Inter', sans-serif; font-size: 3rem; font-weight: 800; letter-spacing: -0.03em; padding: 0 40px 0 36px; pointer-events: none; }
 
     #status-bar { display: flex; align-items: center; gap: 6px; font-size: 0.7rem; color: var(--muted); white-space: nowrap; }
     #status-bar .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--muted); flex-shrink: 0; }
@@ -133,7 +133,8 @@
     #main::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
 
     /* SETUP SCREEN */
-    #setup-screen { max-width: 560px; margin: 50px auto; }
+    #setup-screen { max-width: 560px; margin: 50px auto; display: none; }
+    #setup-screen:empty { display: none !important; margin: 0; padding: 0; }
     .setup-title { font-family: 'Syne', sans-serif; font-size: 2rem; font-weight: 800; margin-bottom: 8px; }
     .setup-title span { color: var(--accent); }
     .setup-sub { color: var(--muted); font-size: 0.8rem; line-height: 1.6; margin-bottom: 28px; }
