@@ -50,7 +50,7 @@
     .spacer { flex: 1; }
 
     /* Main search (above gallery) */
-    #main-search-wrap { position: sticky; top: 0; z-index: 50; padding: 10px 0 14px; background: var(--bg); display: none; }
+    #main-search-wrap { position: sticky; top: 0; z-index: 50; padding: 4px 0 6px; background: var(--bg); display: none; }
     #main-search-wrap .ms-inner { position: relative; display: inline-block; min-width: 280px; }
     #main-search-wrap .si { position: absolute; left: 0; top: 50%; transform: translateY(-50%); color: var(--muted); font-size: 1.2rem; pointer-events: none; }
     #main-search-input { width: 100%; padding: 10px 28px 10px 28px; background: transparent; border: none; border-bottom: 2px solid var(--border); color: var(--text); font-family: 'Inter', sans-serif; font-size: 1.35rem; font-weight: 800; outline: none; transition: border-color 0.2s; letter-spacing: -0.03em; }
@@ -167,10 +167,9 @@
     .no-support { background: var(--red-dim); border: 1px solid var(--red); border-radius: 8px; padding: 16px; font-size: 0.78rem; color: var(--red); line-height: 1.6; }
 
     /* SEARCH BANNER */
-    #search-banner { display: none; padding: 8px 14px; margin-bottom: 20px; border-radius: var(--radius); border: 1px solid var(--border); background: var(--surface); font-size: 0.72rem; color: var(--muted); align-items: center; gap: 8px; }
+    #search-banner { display: none; padding: 2px 0; margin-bottom: 8px; font-size: 0.7rem; color: var(--muted); align-items: center; gap: 8px; }
     #search-banner.vis { display: flex; }
     #search-banner strong { color: var(--text); }
-    #search-banner .sbc { margin-left: auto; cursor: pointer; color: var(--accent); }
 
     .empty-state { text-align: center; padding: 80px 20px; color: var(--muted); }
     .empty-state .esi { font-size: 3rem; margin-bottom: 12px; }
@@ -414,7 +413,7 @@
         <span id="main-search-sizer"></span>
       </div>
     </div>
-    <div id="search-banner"><span id="sb-text"></span><span class="sbc" id="sb-clr">clear</span></div>
+    <div id="search-banner"><span id="sb-text"></span></div>
     <div id="app"></div>
   </div>
 </div>
@@ -581,7 +580,6 @@
   // Initial size
   requestAnimationFrame(resizeSearchInput);
   document.getElementById('main-search-clear').addEventListener('click', clearSearch);
-  document.getElementById('sb-clr').addEventListener('click', clearSearch);
   function clearSearch(){searchInput.value='';searchInput.classList.remove('has-value');searchQuery='';resizeSearchInput();render();searchInput.focus();}
 
   // Type-to-search: any printable key focuses the search bar
