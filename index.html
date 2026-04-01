@@ -49,14 +49,16 @@
     .divider { width: 1px; height: 24px; background: var(--border); flex-shrink: 0; }
     .spacer { flex: 1; }
 
-    #search-wrap { position: relative; flex: 1; max-width: 300px; }
-    #search-wrap .si { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: var(--muted); font-size: 0.85rem; pointer-events: none; }
-    #search-input { width: 100%; padding: 7px 30px 7px 30px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); color: var(--text); font-family: 'DM Mono', monospace; font-size: 0.72rem; outline: none; transition: border-color 0.15s; }
-    #search-input:focus { border-color: var(--accent); }
-    #search-input::placeholder { color: var(--muted); }
-    #search-clear { position: absolute; right: 7px; top: 50%; transform: translateY(-50%); background: none; border: none; color: var(--muted); cursor: pointer; font-size: 1.1rem; line-height: 1; display: none; padding: 2px; }
-    #search-clear:hover { color: var(--text); }
-    #search-input.has-value ~ #search-clear { display: block; }
+    /* Main search (above gallery) */
+    #main-search-wrap { position: sticky; top: 0; z-index: 50; padding: 16px 0 12px; background: var(--bg); display: none; }
+    #main-search-wrap .ms-inner { position: relative; }
+    #main-search-wrap .si { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: var(--muted); font-size: 1.1rem; pointer-events: none; }
+    #main-search-input { width: 100%; padding: 12px 40px 12px 40px; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; color: var(--text); font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 600; outline: none; transition: border-color 0.2s, box-shadow 0.2s; letter-spacing: -0.01em; }
+    #main-search-input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-dim); }
+    #main-search-input::placeholder { color: var(--muted); font-weight: 400; }
+    #main-search-clear { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); background: none; border: none; color: var(--muted); cursor: pointer; font-size: 1.3rem; line-height: 1; display: none; padding: 2px; }
+    #main-search-clear:hover { color: var(--text); }
+    #main-search-input.has-value ~ #main-search-clear { display: block; }
 
     #status-bar { display: flex; align-items: center; gap: 6px; font-size: 0.7rem; color: var(--muted); white-space: nowrap; }
     #status-bar .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--muted); flex-shrink: 0; }
@@ -299,13 +301,6 @@
     #ql-status-row { display: flex; align-items: center; gap: 8px; font-size: 0.72rem; }
     .ql-status-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
     #ql-toggle-media { display: none; position: absolute; bottom: 14px; left: 50px; background: var(--surface2); border: 1px solid var(--border); color: var(--muted); font-size: 1rem; width: 30px; height: 30px; border-radius: 6px; cursor: pointer; align-items: center; justify-content: center; transition: border-color 0.15s, color 0.15s; }
-    #ql-video-nav { display: none; align-items: center; gap: 10px; justify-content: center; margin-top: -6px; }
-    #ql-video-nav.vis { display: flex; }
-    .vn-arrow { background: var(--surface2); border: 1px solid var(--border); color: var(--text); font-size: 0.8rem; width: 26px; height: 26px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: border-color 0.15s, background 0.15s; }
-    .vn-arrow:hover { border-color: var(--accent); background: var(--accent-dim); color: var(--accent); }
-    .vn-dots { display: flex; gap: 6px; align-items: center; }
-    .vn-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--muted); opacity: 0.35; cursor: pointer; transition: opacity 0.2s, background 0.2s; }
-    .vn-dot.active { opacity: 1; background: var(--blue); box-shadow: 0 0 6px var(--blue); }
     #ql-tag-row { width: 100%; }
     #ql-tag-input { width: 100%; box-sizing: border-box; padding: 7px 12px; background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius); color: var(--text); font-family: 'DM Mono', monospace; font-size: 0.75rem; outline: none; transition: border-color 0.15s; }
     #ql-tag-input:focus { border-color: var(--accent); }
@@ -339,13 +334,6 @@
 
 <div id="topbar">
   <h1>Illustration Tracker</h1>
-  <div class="divider"></div>
-  <div id="search-wrap">
-    <input type="text" style="display:none" aria-hidden="true">
-    <span class="si">⌕</span>
-    <input type="text" id="search-input" placeholder="Search files or tags…" autocomplete="off">
-    <button id="search-clear" title="Clear">×</button>
-  </div>
   <div class="divider"></div>
   <div id="status-bar"><div class="dot"></div><span id="status-text">Loading…</span></div>
   <div class="spacer"></div>
@@ -388,11 +376,6 @@
         <button class="size-btn active" id="sz-m"  onclick="setSize('m')">M</button>
         <button class="size-btn" id="sz-l"  onclick="setSize('l')">L</button>
       </div>
-      <div style="display:flex;align-items:center;gap:8px;margin-top:8px;">
-        <span style="font-size:0.6rem;color:var(--muted)">50</span>
-        <input type="range" id="size-slider" min="50" max="300" step="5" value="150">
-        <span style="font-size:0.6rem;color:var(--muted)">300</span>
-      </div>
     </div>
     <div class="ss">
       <div class="toggle-row">
@@ -421,6 +404,13 @@
     <div id="img-banner" style="display:none" onclick="syncImages()">
       <span id="img-banner-text">🖼 Click to load images</span>
       <span class="ib-hint">browser needs one click per session</span>
+    </div>
+    <div id="main-search-wrap">
+      <div class="ms-inner">
+        <span class="si">⌕</span>
+        <input type="text" id="main-search-input" placeholder="Search files or tags…" autocomplete="off">
+        <button id="main-search-clear" title="Clear">×</button>
+      </div>
     </div>
     <div id="search-banner"><span id="sb-text"></span><span class="sbc" id="sb-clr">clear</span></div>
     <div id="app"></div>
@@ -475,11 +465,6 @@
       <img id="ql-img" src="" alt="">
       <video id="ql-video" src="" controls style="display:none;max-width:100%;max-height:60vh;border-radius:6px;"></video>
     </div>
-    <div id="ql-video-nav">
-      <button class="vn-arrow" id="vn-prev" title="Previous video">←</button>
-      <div class="vn-dots" id="vn-dots"></div>
-      <button class="vn-arrow" id="vn-next" title="Next video">→</button>
-    </div>
     <div id="ql-name"></div>
     <div id="ql-status-row"></div>
     <div id="ql-tags"></div>
@@ -511,10 +496,12 @@
   let saveTimer, toastT, searchTimer, zoomRaf, _lastHideNames = null;
   const STATUS_CYCLE = [null,'green','red','yellow','blue'];
 
+  // ── LOCALSTORAGE CONFIG ──
   const getCfg = k => localStorage.getItem(CONFIG_KEYS[k]) || '';
   const setCfg = (k,v) => localStorage.setItem(CONFIG_KEYS[k], v);
   const hasCfg = () => getCfg('token') && getCfg('repo') && getCfg('path');
 
+  // ── INDEXEDDB ──
   const dbP = new Promise(res => { try { const r=indexedDB.open('AssetTrackerV4',1); r.onupgradeneeded=e=>{ const db=e.target.result; if(!db.objectStoreNames.contains('h')) db.createObjectStore('h'); if(!db.objectStoreNames.contains('thumbs')) db.createObjectStore('thumbs'); }; r.onsuccess=e=>res(e.target.result); r.onerror=()=>res(null); } catch{res(null);} });
   async function saveH(k,v){try{const db=await dbP;if(!db)return;db.transaction('h','readwrite').objectStore('h').put(v,k);}catch{}}
   async function getH(k){try{const db=await dbP;if(!db)return null;return new Promise(r=>{const q=db.transaction('h').objectStore('h').get(k);q.onsuccess=()=>r(q.result);q.onerror=()=>r(null)});}catch{return null;}}
@@ -523,38 +510,27 @@
   async function saveThumb(k,blob){try{const db=await dbP;if(!db)return;db.transaction('thumbs','readwrite').objectStore('thumbs').put(blob,k);}catch{}}
   async function clearThumbs(){try{const db=await dbP;if(!db)return;db.transaction('thumbs','readwrite').objectStore('thumbs').clear();}catch{}}
 
+  // ── SIZE ──
   const SIZES = { xs: 70, s: 110, m: 150, l: 220 };
-  const sizeSlider = document.getElementById('size-slider');
-
-  function setCellSize(v, fromPreset){
+  function setSize(key){
+    const v = SIZES[key];
     document.documentElement.style.setProperty('--cell', v+'px');
     document.body.classList.toggle('hide-names', v < 90);
-    sizeSlider.value = v;
-    // Highlight matching preset button, or clear all if custom
-    const presetKey = Object.keys(SIZES).find(k => SIZES[k] === v);
-    ['xs','s','m','l'].forEach(k => document.getElementById('sz-'+k).classList.toggle('active', k===presetKey));
-    localStorage.setItem('atZoom', v);
+    ['xs','s','m','l'].forEach(k => document.getElementById('sz-'+k).classList.toggle('active', k===key));
+    localStorage.setItem('atZoom', key);
     if(!localStorage.getItem('atDot') && !localStorage.getItem('atTint')){
-      const dotOn = v >= 90;
+      const dotOn = key !== 'xs';
       document.getElementById('dot-toggle').checked = dotOn;
       document.body.classList.toggle('no-dot', !dotOn);
       document.getElementById('tint-toggle').checked = true;
       document.body.classList.remove('no-tint');
     }
   }
+  const savedSize = localStorage.getItem('atZoom') || 'm';
+  const validSize = SIZES[savedSize] ? savedSize : 'm';
+  setSize(validSize);
 
-  function setSize(key){
-    setCellSize(SIZES[key], true);
-  }
-
-  sizeSlider.addEventListener('input', e => {
-    setCellSize(parseInt(e.target.value), false);
-  });
-
-  const savedZoom = localStorage.getItem('atZoom');
-  const initialSize = savedZoom ? (SIZES[savedZoom] || parseInt(savedZoom) || 150) : 150;
-  setCellSize(initialSize);
-
+  // ── THEME ──
   function setTheme(t){
     document.body.classList.remove('theme-light','theme-bolt');
     if(t==='light') document.body.classList.add('theme-light');
@@ -564,16 +540,18 @@
   }
   setTheme(localStorage.getItem('atTheme')||'dark');
 
+  // ── TINT ──
   const tintToggle = document.getElementById('tint-toggle');
   tintToggle.checked = localStorage.getItem('atTint') !== 'off';
   document.body.classList.toggle('no-tint', !tintToggle.checked);
   tintToggle.addEventListener('change', () => { document.body.classList.toggle('no-tint', !tintToggle.checked); localStorage.setItem('atTint', tintToggle.checked ? 'on' : 'off'); });
 
+  // ── DOT ──
   const dotToggle = document.getElementById('dot-toggle');
   if(localStorage.getItem('atDot') !== null){
     dotToggle.checked = localStorage.getItem('atDot') !== 'off';
   } else {
-    dotToggle.checked = initialSize >= 90;
+    dotToggle.checked = validSize !== 'xs';
   }
   document.body.classList.toggle('no-dot', !dotToggle.checked);
   dotToggle.addEventListener('change', () => { document.body.classList.toggle('no-dot', !dotToggle.checked); localStorage.setItem('atDot', dotToggle.checked ? 'on' : 'off'); });
@@ -583,22 +561,38 @@
   document.body.classList.toggle('images-only', imgOnlyToggle.checked);
   imgOnlyToggle.addEventListener('change', () => { document.body.classList.toggle('images-only', imgOnlyToggle.checked); localStorage.setItem('atImgOnly', imgOnlyToggle.checked ? 'on' : 'off'); });
 
-  const searchInput = document.getElementById('search-input');
+  // ── SEARCH ──
+  const searchInput = document.getElementById('main-search-input');
   searchInput.addEventListener('input', e=>{
     searchInput.classList.toggle('has-value', !!e.target.value);
     clearTimeout(searchTimer);
     searchTimer=setTimeout(()=>{searchQuery=e.target.value.trim().toLowerCase();render();},80);
   });
-  document.getElementById('search-clear').addEventListener('click', clearSearch);
+  document.getElementById('main-search-clear').addEventListener('click', clearSearch);
   document.getElementById('sb-clr').addEventListener('click', clearSearch);
-  function clearSearch(){searchInput.value='';searchInput.classList.remove('has-value');searchQuery='';render();}
+  function clearSearch(){searchInput.value='';searchInput.classList.remove('has-value');searchQuery='';render();searchInput.focus();}
 
+  // Type-to-search: any printable key focuses the search bar
+  document.addEventListener('keydown', e => {
+    const tag = document.activeElement?.tagName;
+    if(tag === 'INPUT' || tag === 'TEXTAREA') return;
+    if(document.getElementById('ql-backdrop').classList.contains('open')) return;
+    if(document.getElementById('tm-backdrop').classList.contains('open')) return;
+    if(document.getElementById('pw-backdrop').classList.contains('open')) return;
+    if(e.key.length === 1 && !e.ctrlKey && !e.metaKey && !e.altKey){
+      searchInput.focus();
+    }
+  });
+
+  // ── TOAST & STATUS ──
   function toast(m,d=2400){const el=document.getElementById('toast');el.textContent=m;el.classList.add('show');clearTimeout(toastT);toastT=setTimeout(()=>el.classList.remove('show'),d);}
   function setStatus(s,t){document.getElementById('status-bar').className=s;document.getElementById('status-text').textContent=t;}
 
+  // ── HELPERS ──
   function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
   function hi(text,q){if(!q)return esc(text);const i=text.toLowerCase().indexOf(q);if(i<0)return esc(text);return esc(text.slice(0,i))+'<mark>'+esc(text.slice(i,i+q.length))+'</mark>'+esc(text.slice(i+q.length));}
 
+  // ── GITHUB API ──
   function ghHeaders(){ return { 'Authorization': 'token '+getCfg('token'), 'Accept': 'application/vnd.github.v3+json', 'Content-Type': 'application/json' }; }
   function ghUrl(){ return `https://api.github.com/repos/${getCfg('repo')}/contents/${getCfg('path')}`; }
 
@@ -659,6 +653,7 @@
     }, 800);
   }
 
+  // ── INIT ──
   async function init(){
     if(!hasCfg()){
       renderSetup();
@@ -692,6 +687,7 @@
     }
   }
 
+  // ── SETUP SCREEN ──
   function renderSetup(){
     document.getElementById('app').innerHTML='';
     document.getElementById('setup-screen').innerHTML=`
@@ -764,6 +760,7 @@
     init();
   }
 
+  // ── NEEDS IMAGES SCREEN ──
   function renderNeedsImages(){
     document.getElementById('setup-screen').style.display='block';
     document.getElementById('setup-screen').innerHTML=`
@@ -817,6 +814,7 @@
 
   async function reGrantPermission(){ await syncImages(); }
 
+  // ── LINK IMAGE FOLDER ──
   async function linkImgFolder(){
     if(!window.showDirectoryPicker){ toast('Requires Chrome or Edge'); return; }
     try {
@@ -882,12 +880,8 @@
     assets.forEach(cat => cat.items.forEach(item => {
       const manualVideoName = videoLinks[item.name];
       if(manualVideoName){
-        const manualList = Array.isArray(manualVideoName) ? manualVideoName : [manualVideoName];
-        const anyFound = manualList.some(vName => {
-          const manualBase = vName.replace(/\.[^/.]+$/,'').toLowerCase();
-          return !!videoBlobMap[manualBase];
-        });
-        if(anyFound && item.status !== 'blue'){ item.status='blue'; statuses[item.name]='blue'; changed++; }
+        const manualBase = manualVideoName.replace(/\.[^/.]+$/,'').toLowerCase();
+        if(videoBlobMap[manualBase] && item.status !== 'blue'){ item.status='blue'; statuses[item.name]='blue'; changed++; }
         return;
       }
       const base = item.name.replace(/\.[^/.]+$/,'').toLowerCase();
@@ -898,28 +892,18 @@
     if(changed){ render(); ghSave(); toast(`🎬 ${changed} illustrations marked animated`); }
   }
 
-  function getVideoSrcs(item){
-    const srcs = [];
-    // Manual links (can be string or array)
-    const manual = videoLinks[item.name];
-    if(manual){
-      const manualList = Array.isArray(manual) ? manual : [manual];
-      manualList.forEach(vName => {
-        const base = vName.replace(/\.[^/.]+$/,'').toLowerCase();
-        if(videoBlobMap[base]) srcs.push(videoBlobMap[base]);
-      });
-      if(srcs.length) return srcs;
-    }
-    // Auto-match
+  function getVideoSrc(item){
+    const manualBase = videoLinks[item.name] ? videoLinks[item.name].replace(/\.[^/.]+$/,'').toLowerCase() : null;
+    if(manualBase) return videoBlobMap[manualBase] || null;
     const autoBase = item.name.replace(/\.[^/.]+$/,'').toLowerCase();
-    if(videoBlobMap[autoBase]){ srcs.push(videoBlobMap[autoBase]); return srcs; }
+    if(videoBlobMap[autoBase]) return videoBlobMap[autoBase];
     const stripped = autoBase.replace(/_[\w\d]+$/, '');
     const videoKeys = Object.keys(videoBlobMap);
     const match = videoKeys.find(k => k.startsWith(stripped) && stripped.length >= 5);
-    if(match) srcs.push(videoBlobMap[match]);
-    return srcs;
+    return match ? videoBlobMap[match] : null;
   }
 
+  // ── LOAD IMAGES ──
   async function collectImages(dirH, arr){
     for await(const [name,h] of dirH.entries()){
       if(h.kind==='file'){
@@ -965,8 +949,10 @@
     })));
 
     setStatus('synced','Ready');
+    document.getElementById('main-search-wrap').style.display = 'block';
     render();
 
+    // Generate missing thumbs in background batches
     if(thumbMisses.length){
       setStatus('saving', `Generating ${thumbMisses.length} thumbnails…`);
       let done=0;
@@ -994,40 +980,16 @@
     const ci = ib.toLowerCase().replace(/[^a-z0-9]/g,'');
     const cf = fn.toLowerCase().replace(/[^a-z0-9]/g,'');
     if(!ci || !cf) return false;
-    // exact match (ignoring special chars)
     if(ci === cf) return true;
-    // substring match — only if lengths are very close (within 15%)
-    const lenRatio = Math.min(ci.length, cf.length) / Math.max(ci.length, cf.length);
-    if(lenRatio >= 0.85 && ci.length >= 5){
-      if(cf.includes(ci) || ci.includes(cf)) return true;
-    }
-    // word overlap — check if core image words appear in work file name
-    // "core" = strip common suffixes/prefixes that don't identify the asset
-    const NOISE = new Set(['png','jpg','jpeg','svg','off','top','iso','side','solo','front','back','left','right','full','base','clear','work','files','option','version','new','with','without','no']);
-    const wi = ib.toLowerCase().split(/[^a-z0-9]+/).filter(w=>w.length>1 && !NOISE.has(w));
-    const wf = fn.toLowerCase().split(/[^a-z0-9]+/).filter(w=>w.length>1 && !NOISE.has(w));
-    if(wi.length >= 2 && wf.length >= 2){
-      const matched = wi.filter(w=>wf.includes(w)).length;
-      const matchRatio = matched / wi.length;
-      // If image has parenthetical content, treat it as a distinct variant
-      // e.g. "Small Car (New With Roof)" — the parens make it a different asset
-      const hasParens = ib.includes('(');
-      const fnHasParens = fn.includes('(');
-      // Both have parens or neither: require 85%+ of image words found in work file
-      // Only image has parens: must match nearly all words (it's a specific variant)
-      // Only work file has parens: still allow match (work file naming is less controlled)
-      if(hasParens && !fnHasParens){
-        // Image specifies a variant like "(New With Roof)" but work file doesn't — likely different asset
-        // Require very high match including the paren words
-        const wiAll = ib.toLowerCase().split(/[^a-z0-9]+/).filter(w=>w.length>1);
-        const wfAll = fn.toLowerCase().split(/[^a-z0-9]+/).filter(w=>w.length>1);
-        const allMatched = wiAll.filter(w=>wfAll.includes(w)).length;
-        if(allMatched / wiAll.length >= 0.9) return true;
-      } else {
-        if(matchRatio >= 0.85) return true;
-      }
-    }
-    return false;
+    if(ci.length >= 5 && cf.includes(ci)) return true;
+    if(cf.length >= 5 && ci.includes(cf)) return true;
+    const wi = ib.toLowerCase().split(/[^a-z0-9]+/).filter(w=>w.length>2);
+    const wf = fn.toLowerCase().split(/[^a-z0-9]+/).filter(w=>w.length>2);
+    if(wi.length >= 2 && wi.filter(w=>wf.includes(w)).length / wi.length >= 0.75) return true;
+    if(ci.length < 6 || cf.length < 6) return false;
+    const dp=Array(ci.length+1).fill(0).map(()=>Array(cf.length+1).fill(0)); let mx=0;
+    for(let i=1;i<=ci.length;i++) for(let j=1;j<=cf.length;j++) if(ci[i-1]===cf[j-1]){dp[i][j]=dp[i-1][j-1]+1;mx=Math.max(mx,dp[i][j]);}
+    return mx>=6 && mx/ci.length>=0.75 && mx/cf.length>=0.75;
   }
   async function collectWorkNames(dirH, arr, depth){
     depth = depth||0;
@@ -1057,7 +1019,7 @@
     await new Promise(r=>setTimeout(r,0));
     let changed=0;
     assets.forEach(cat=>cat.items.forEach(item=>{
-      if(item.status==='blue') return; // never touch animated
+      if(item.status==='blue'||item.status==='green') return;
       const base=item.name.replace(/\.[^/.]+$/,'').toLowerCase();
       const found=names.some(n=>fuzzyMatch(base,n));
       const next = found ? 'green' : (item.status==='yellow' ? 'yellow' : 'red');
@@ -1067,6 +1029,7 @@
     else{toast('✓ Scan done — nothing changed');setStatus('synced','Ready');}
   }
 
+  // ── VISIBILITY ──
   function itemVisible(item){
     if(activeFilter.size>0&&!activeFilter.has(item.status||null)) return false;
     if(activeTagFilter&&!(item.tags||[]).includes(activeTagFilter)) return false;
@@ -1079,6 +1042,7 @@
     return true;
   }
 
+  // ── FILTER ──
   function setFilter(f){
     if(f===null){
       activeFilter.clear();
@@ -1122,6 +1086,7 @@
     }
   }
 
+  // ── RENDER ──
   function render(){
     const app=document.getElementById('app'); app.innerHTML='';
     updateCounts(); buildCatNav(); buildTagFilterSidebar();
@@ -1236,6 +1201,7 @@
     document.getElementById('sum-t').textContent=total+' total';
   }
 
+  // ── TOGGLE STATUS ──
   function toggleStatus(ci,ii){
     if(!editMode){ return; }
     if(!assets[ci]||!assets[ci].items[ii]){ console.error('[toggle] bad index',ci,ii,assets.length); return; }
@@ -1258,6 +1224,7 @@
     ghSave();
   }
 
+  // ── TAG MODAL ──
   function openTagModal(ci,ii){
     tagTarget={ci,ii};
     const item=assets[ci].items[ii];
@@ -1269,7 +1236,6 @@
   }
   document.getElementById('tm-close').onclick=closeModal;
   document.getElementById('tm-backdrop').addEventListener('click',e=>{if(e.target===document.getElementById('tm-backdrop'))closeModal();});
-  document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
   document.getElementById('tag-input').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();addTagFromInput();}});
   document.getElementById('tag-add-btn').onclick=addTagFromInput;
   function closeModal(){document.getElementById('tm-backdrop').classList.remove('open');tagTarget=null;}
@@ -1320,6 +1286,7 @@
     buildTagFilterSidebar(); ghSave();
   }
 
+  // ── EXPORT ──
   function exportData(){
     let out='Assets to Request:\n\n'; let found=false;
     assets.forEach(cat=>{
@@ -1336,6 +1303,7 @@
     a.download='Asset_Request_List.txt'; a.click(); toast('✓ Exported');
   }
 
+  // ── RESET ──
   async function clearAll(){
     if(!confirm('Reset everything? This clears your GitHub config, folder links, and filters. Your data file on GitHub is untouched.')) return;
     await clearH(); await clearThumbs();
@@ -1344,11 +1312,13 @@
     activeImgHandle=activeWorkHandle=null;
     document.getElementById('app').innerHTML='';
     searchInput.value=''; searchInput.classList.remove('has-value');
+    document.getElementById('main-search-wrap').style.display = 'none';
     document.getElementById('summary-bar').classList.remove('visible');
     setStatus('','—');
     init();
   }
 
+  // ── EDIT MODE ──
   function toggleEditMode(){
     if(editMode){
       exitEditMode();
@@ -1383,6 +1353,7 @@
   document.getElementById('pw-backdrop').addEventListener('click', e => { if(e.target===document.getElementById('pw-backdrop')) document.getElementById('pw-backdrop').classList.remove('open'); });
   document.getElementById('pw-input').addEventListener('keydown', e => { if(e.key==='Enter') submitPassword(); });
 
+  // ── QUICK LOOK ──
   const STATUS_LABELS = { green:'Have files', red:'Missing', yellow:'Need to request', blue:'Animated' };
   const STATUS_COLORS = { green:'var(--green)', red:'var(--red)', yellow:'var(--yellow)', blue:'var(--blue)' };
   let qlItems = [], qlIndex = 0;
@@ -1395,23 +1366,18 @@
     document.getElementById('ql-backdrop').classList.add('open');
   }
 
-  let qlVideoSrcs = [], qlVideoIdx = 0;
-
   function renderQuickLook(item){
-    qlVideoSrcs = getVideoSrcs(item);
-    qlVideoIdx = 0;
+    const videoSrc = getVideoSrc(item);
     const imgEl = document.getElementById('ql-img');
     const vidEl = document.getElementById('ql-video');
     const toggleBtn = document.getElementById('ql-toggle-media');
-    const videoNav = document.getElementById('ql-video-nav');
 
     imgEl.src = item.fullSrc || item.src;
-    vidEl.src = qlVideoSrcs.length ? qlVideoSrcs[0] : '';
+    vidEl.src = videoSrc || '';
     vidEl.style.display = 'none';
     imgEl.style.display = '';
-    videoNav.classList.remove('vis');
 
-    if(qlVideoSrcs.length){
+    if(videoSrc){
       toggleBtn.style.display = 'flex';
       toggleBtn.textContent = '▶';
       toggleBtn._showingVideo = false;
@@ -1432,7 +1398,7 @@
       item.tags.forEach(t => { const d=document.createElement('div'); d.className='ql-tag'; d.textContent=t; const x=document.createElement('button'); x.className='ql-tag-del'; x.textContent='×'; x.onclick=()=>qlRemoveTag(item,t); d.appendChild(x); tl.appendChild(d); });
     }
     document.getElementById('ql-counter').textContent = qlItems.length > 1 ? `${qlIndex+1} / ${qlItems.length}` : '';
-    document.getElementById('ql-link-video').textContent = qlVideoSrcs.length ? '＋ Add another video' : '＋ Link video';
+    document.getElementById('ql-link-video').textContent = videoSrc ? '🎬 Relink video' : '＋ Link video';
     document.getElementById('ql-link-video')._item = item;
     document.getElementById('ql-tag-row').style.display = editMode ? 'block' : 'none';
     document.getElementById('ql-tag-input').value = '';
@@ -1483,33 +1449,6 @@
   });
   document.getElementById('ql-next').onclick = e => { e.stopPropagation(); qlNavigate(1); };
 
-  function renderVideoNav(){
-    const nav = document.getElementById('ql-video-nav');
-    const dots = document.getElementById('vn-dots');
-    if(qlVideoSrcs.length <= 1){ nav.classList.remove('vis'); return; }
-    nav.classList.add('vis');
-    dots.innerHTML = '';
-    qlVideoSrcs.forEach((_, i) => {
-      const d = document.createElement('div');
-      d.className = 'vn-dot' + (i === qlVideoIdx ? ' active' : '');
-      d.onclick = () => switchVideo(i);
-      dots.appendChild(d);
-    });
-  }
-
-  function switchVideo(idx){
-    if(idx < 0 || idx >= qlVideoSrcs.length) return;
-    const vidEl = document.getElementById('ql-video');
-    vidEl.pause();
-    qlVideoIdx = idx;
-    vidEl.src = qlVideoSrcs[qlVideoIdx];
-    vidEl.play();
-    renderVideoNav();
-  }
-
-  document.getElementById('vn-prev').onclick = e => { e.stopPropagation(); switchVideo((qlVideoIdx - 1 + qlVideoSrcs.length) % qlVideoSrcs.length); };
-  document.getElementById('vn-next').onclick = e => { e.stopPropagation(); switchVideo((qlVideoIdx + 1) % qlVideoSrcs.length); };
-
   document.getElementById('ql-toggle-media').onclick = e => {
     e.stopPropagation();
     const btn = e.currentTarget;
@@ -1517,15 +1456,11 @@
     const vidEl = document.getElementById('ql-video');
     btn._showingVideo = !btn._showingVideo;
     if(btn._showingVideo){
-      imgEl.style.display = 'none'; vidEl.style.display = '';
-      vidEl.src = qlVideoSrcs[qlVideoIdx] || '';
-      vidEl.play();
+      imgEl.style.display = 'none'; vidEl.style.display = ''; vidEl.play();
       btn.textContent = '🖼';
-      renderVideoNav();
     } else {
       vidEl.pause(); vidEl.style.display = 'none'; imgEl.style.display = '';
       btn.textContent = '▶';
-      document.getElementById('ql-video-nav').classList.remove('vis');
     }
   };
 
@@ -1538,16 +1473,7 @@
       const file = await fileHandle.getFile();
       const base = file.name.replace(/\.[^/.]+$/,'').toLowerCase();
       videoBlobMap[base] = URL.createObjectURL(file);
-      // Append to videoLinks array
-      const existing = videoLinks[item.name];
-      if(!existing){
-        videoLinks[item.name] = [file.name];
-      } else if(Array.isArray(existing)){
-        if(!existing.includes(file.name)) existing.push(file.name);
-      } else {
-        // migrate old string format to array
-        videoLinks[item.name] = existing === file.name ? [existing] : [existing, file.name];
-      }
+      videoLinks[item.name] = file.name;
       if(item.status !== 'blue'){ item.status = 'blue'; statuses[item.name] = 'blue'; }
       ghSave(); render();
       renderQuickLook(item);
