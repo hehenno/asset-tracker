@@ -874,10 +874,13 @@
     let changed = 0;
     const videoKeys = Object.keys(videoBlobMap);
     assets.forEach(cat => cat.items.forEach(item => {
-      const manualVideoName = videoLinks[item.name];
-      if(manualVideoName){
-        const manualBase = manualVideoName.replace(/\.[^/.]+$/,'').toLowerCase();
-        if(videoBlobMap[manualBase] && item.status !== 'blue'){ item.status='blue'; statuses[item.name]='blue'; changed++; }
+      const linked = videoLinks[item.name];
+      if(linked){
+        const linkName = Array.isArray(linked) ? linked[0] : linked;
+        if(linkName){
+          const manualBase = String(linkName).replace(/\.[^/.]+$/,'').toLowerCase();
+          if(videoBlobMap[manualBase] && item.status !== 'blue'){ item.status='blue'; statuses[item.name]='blue'; changed++; }
+        }
         return;
       }
       const base = item.name.replace(/\.[^/.]+$/,'').toLowerCase();
@@ -889,8 +892,15 @@
   }
 
   function getVideoSrc(item){
-    const manualBase = videoLinks[item.name] ? videoLinks[item.name].replace(/\.[^/.]+$/,'').toLowerCase() : null;
-    if(manualBase) return videoBlobMap[manualBase] || null;
+    const linked = videoLinks[item.name];
+    if(linked){
+      // Handle both string and array formats
+      const linkName = Array.isArray(linked) ? linked[0] : linked;
+      if(linkName){
+        const manualBase = String(linkName).replace(/\.[^/.]+$/,'').toLowerCase();
+        if(videoBlobMap[manualBase]) return videoBlobMap[manualBase];
+      }
+    }
     const autoBase = item.name.replace(/\.[^/.]+$/,'').toLowerCase();
     if(videoBlobMap[autoBase]) return videoBlobMap[autoBase];
     const stripped = autoBase.replace(/_[\w\d]+$/, '');
@@ -1146,7 +1156,10 @@
         const pip=document.createElement('div');
         pip.className='status-pip'+(item.status?' pip-'+item.status:'');
 
-        div.onclick=()=>{ if(editMode) toggleStatus(ci,idx); else openQuickLook(item); };
+        div.addEventListener('click', (e) => {
+          if(e.target.closest('.tag-btn') || e.target.closest('.ql-btn')) return;
+          if(editMode) toggleStatus(ci,idx); else openQuickLook(item);
+        });
         div.appendChild(tb); div.appendChild(qlb); div.appendChild(img);
         div.appendChild(nameEl); div.appendChild(tagsEl); div.appendChild(pip);
         gallery.appendChild(div);
@@ -1355,10 +1368,12 @@
   let qlItems = [], qlIndex = 0;
 
   function openQuickLook(item){
+    if(!item) return;
     qlItems = [];
     assets.forEach(cat => cat.items.filter(itemVisible).forEach(i => qlItems.push(i)));
     qlIndex = qlItems.indexOf(item);
-    renderQuickLook(item);
+    if(qlIndex < 0) qlIndex = 0;
+    renderQuickLook(qlItems[qlIndex] || item);
     document.getElementById('ql-backdrop').classList.add('open');
   }
 
