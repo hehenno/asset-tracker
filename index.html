@@ -50,14 +50,13 @@
     .spacer { flex: 1; }
 
     /* Main search (above gallery) */
-    #main-search-wrap { position: sticky; top: 0; z-index: 50; padding: 4px 0 20px; background: var(--bg); display: none; }
-    #main-search-wrap .ms-inner { position: relative; display: inline-block; min-width: 280px; }
+    #main-search-wrap { position: sticky; top: 0; z-index: 50; padding: 10px 0 20px; background: var(--bg); display: none; }
+    #main-search-wrap .ms-inner { position: relative; width: 100%; }
     #main-search-input { width: 100%; padding: 6px 40px 6px 0; background: transparent; border: none; color: var(--text); font-family: 'Inter', sans-serif; font-size: 3rem; font-weight: 800; outline: none; letter-spacing: -0.03em; }
     #main-search-input::placeholder { color: var(--muted); font-weight: 600; opacity: 0.35; }
     #main-search-clear { position: absolute; right: 4px; top: 50%; transform: translateY(-50%); background: none; border: none; color: var(--muted); cursor: pointer; font-size: 1.8rem; line-height: 1; display: none; padding: 2px; }
     #main-search-clear:hover { color: var(--text); }
     #main-search-input.has-value ~ #main-search-clear { display: block; }
-    #main-search-sizer { position: absolute; top: 0; left: 0; visibility: hidden; white-space: pre; font-family: 'Inter', sans-serif; font-size: 3rem; font-weight: 800; letter-spacing: -0.03em; padding: 0 40px 0 0; pointer-events: none; }
 
     #status-bar { display: flex; align-items: center; gap: 6px; font-size: 0.7rem; color: var(--muted); white-space: nowrap; }
     #status-bar .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--muted); flex-shrink: 0; }
@@ -406,9 +405,8 @@
     </div>
     <div id="main-search-wrap">
       <div class="ms-inner">
-        <input type="text" id="main-search-input" placeholder="Search files or tags…" autocomplete="off" size="1">
+        <input type="text" id="main-search-input" placeholder="Search files or tags…" autocomplete="off">
         <button id="main-search-clear" title="Clear">×</button>
-        <span id="main-search-sizer"></span>
       </div>
     </div>
     <div id="search-banner"><span id="sb-text"></span></div>
@@ -562,23 +560,13 @@
 
   // ── SEARCH ──
   const searchInput = document.getElementById('main-search-input');
-  const searchSizer = document.getElementById('main-search-sizer');
-  function resizeSearchInput(){
-    const val = searchInput.value || searchInput.placeholder;
-    searchSizer.textContent = val;
-    const w = Math.max(280, searchSizer.offsetWidth + 36);
-    searchInput.parentElement.style.width = w + 'px';
-  }
   searchInput.addEventListener('input', e=>{
     searchInput.classList.toggle('has-value', !!e.target.value);
-    resizeSearchInput();
     clearTimeout(searchTimer);
     searchTimer=setTimeout(()=>{searchQuery=e.target.value.trim().toLowerCase();render();},80);
   });
-  // Initial size
-  requestAnimationFrame(resizeSearchInput);
   document.getElementById('main-search-clear').addEventListener('click', clearSearch);
-  function clearSearch(){searchInput.value='';searchInput.classList.remove('has-value');searchQuery='';resizeSearchInput();render();searchInput.focus();}
+  function clearSearch(){searchInput.value='';searchInput.classList.remove('has-value');searchQuery='';render();searchInput.focus();}
 
   // Type-to-search: any printable key focuses the search bar
   document.addEventListener('keydown', e => {
