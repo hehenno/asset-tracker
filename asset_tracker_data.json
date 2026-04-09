@@ -2824,7 +2824,8 @@
       "woman",
       "briefcase",
       "suitcase",
-      "travel"
+      "travel",
+      "human"
     ],
     "Row 357 Face with helmet.png": [
       "head",
@@ -3168,7 +3169,7 @@
     "0_Row 24 XXL Side (New Colour).png": [
       "car",
       "xxl",
-      "ˇ",
+      "Ë",
       "1"
     ],
     "0_Row 374 Premium + Off X.png": [
@@ -3195,7 +3196,7 @@
     ],
     "0_Taxi Lexus_Off X.png": [
       "car",
-      "ˇ",
+      "Ë",
       "1"
     ],
     "0_Taxi Red Roof_Cream_Iso.png": [
@@ -3220,7 +3221,7 @@
     "Bolt Premium Motorbike Off X.png": [
       "motorbike",
       "motorcycle",
-      "ˇ",
+      "Ë",
       "1"
     ],
     "Bolt_Aurora_icon_Top.png": [
@@ -3329,14 +3330,14 @@
     "Premium MotorBike_Off X_Vietnam (1).png": [
       "motorbike",
       "motorcycle",
-      "ˇ",
+      "Ë",
       "1"
     ],
     "Premium MotorBike_Off X.png": [
       "motorcycle",
       "premium",
       "motorbike",
-      "ˇ",
+      "Ë",
       "1"
     ],
     "Premium MotorBike_Top_Vietnam (1).png": [
@@ -3357,7 +3358,7 @@
     ],
     "Row 1 Bolt Green Back Hero Car Side.png": [
       "car",
-      "ˇ",
+      "Ë",
       "1"
     ],
     "Row 1 Hero Green Circle Car Iso.png": [
@@ -3376,7 +3377,7 @@
     "Row 5 Electric All Green Car Off X.png": [
       "car",
       "electric",
-      "ˇ",
+      "Ë",
       "1"
     ],
     "Row 5 Electric All Green Car Top.png": [
@@ -3388,7 +3389,7 @@
     ],
     "Row 5 Various Category All White Car Side.png": [
       "car",
-      "ˇ",
+      "Ë",
       "1"
     ],
     "Row 6 Comfort Car Iso.png": [
